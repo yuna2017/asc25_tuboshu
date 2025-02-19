@@ -50,8 +50,8 @@
 \title{
     \includegraphics[width=0.4\textwidth]{ysu-logo.png}\\[1cm] % logo
     {\LARGE Proposal For ASC 25}\\[0.5cm]
-    \large Team Name: YSU Super Fighters\\[1cm] % 使用占位符
-    \begin{tabular}{c}
+    \large Tuboshu Eliminators Team\\[1cm] % 土拨鼠消灭者
+        \begin{tabular}{c}
         \large Li Wangyang \\
         \large Jin Chenye \\
         \large Cui Shuyang \\
@@ -94,20 +94,16 @@ The supercomputing center adopts a mature and general system architecture, which
 \centering
 \caption{The main configurations}
 \vspace{0.5cm}
-\begin{tabular}{|l|l|l|p{7cm}|}  % 减小最后一列宽度
+\begin{tabular}{lccp{7cm}}  % 移除竖线
 \toprule
 Type & Count & Name & Description \\
 \midrule
 Management & 1 & mgt1 & System monitoring and job scheduling \\
-\hline
-Login node & 1 & login &  \\
-\hline
+Login node & 1 & login & \\
 Compute node & 30 & node1~30 & 2 Intel E5-2683v3 processors, 28 Cores 2.0Ghz, 
-64GB DDR4 ECC REG memory, Infiniband QDR 40Gb/s network \\  % 拆分长行
-\hline
+64GB DDR4 ECC REG memory, Infiniband QDR 40Gb/s network \\
 GPU Node & 2 & GPU1,2 & 2 Intel E5-2683v3 Processors, 28 Cores 2.0Ghz, 
-128GB DDR4 ECC REG memory, Infiniband QDR 40Gb/s network, NVIDIA TitanX GPU \\  % 拆分长行
-\hline
+128GB DDR4 ECC REG memory, Infiniband QDR 40Gb/s network, NVIDIA TitanX GPU \\
 IO node & 2 & gpfs1,nfs & GPFS parallel file system (18TB), NFS network storage \\
 \bottomrule
 \end{tabular}
@@ -119,32 +115,21 @@ The Supercomputing center supports the running of computing software such as Ans
 \centering
 \caption{Software resources}
 \vspace{0.5cm}
-\begin{tabular}{|l|p{8cm}|}
+\begin{tabular}{lp{8cm}}  % 移除竖线
 \toprule
 Software Name & Description \\
 \midrule
 Centos7.2 & Operating System Platform \\
-\hline
 NFSv4 & Web file system \\
-\hline
 MPICH/MPICH2/OpenMPI & Open source parallel development environment \\
-\hline
 Paramon Paratune & Application of running feature collector Application of running feature analyzer \\
-\hline
 Intel Parallel Studio XE 2015 & Intel Parallel Development Suite \\
-\hline
 Intel MKL 2017 & Intel Library of Mathematical Functions \\
-\hline
 Intel MPI 2017 & Intel Parallel Messaging Library \\
-\hline
 IBM Platform Computing LSF & Resource Management and Operational Movement Control System \\
-\hline
 IBM GPFS & Common Parallel Document System \\
-\hline
 Openmpi 2.0.2 & Open source Intel Parallel Messaging Library \\
-\hline
 FFTW & FFTW (Fastest Fourier Transform in the West) \\
-\hline
 gromacs-5.1.4 & Molecular dynamics program \\
 \bottomrule
 \end{tabular}
@@ -216,6 +201,9 @@ The five members of our team consisted of one senior and four sophomores, and al
 \end{minipage}
 \end{center}
 \end{table}
+
+\subsection{Team Photo}
+
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.8\textwidth]{Team_Photo.png}
@@ -257,18 +245,14 @@ The general single CPU node configuration is shown below:
 \centering
 \caption{Single Node Configuration}
 \vspace{0.5cm}
-\begin{tabular}{|l|l|l|}
+\begin{tabular}{lll}
 \toprule
-Component Name & Model & Num \\
+Component Name & Model & Count \\
 \midrule
 Server & Inspur NF5280M7 & 1 \\
-\hline
 CPU & Intel Xeon 6530 & 2 \\
-\hline
 Memory & DDR5 32G & 16 \\
-\hline
 HardDrive & SSD 480G & 1 \\
-\hline
 HCA & InfiniBand Mellanox ConnectX®-7 HDR & 1 \\
 \bottomrule
 \end{tabular}
@@ -301,22 +285,35 @@ For two GPU nodes, the GPUs in the nodes are connected to each other via NVIDIA 
     \label{fig:cluster_arch}
 \end{figure}
 
-\begin{table*}[htbp]
+\begin{table}[H]
 \centering
-\resizebox{1.0\textwidth}{!}{
-\begin{tabular}{l|cccc|ccc|ccc|c|c}
+\vspace{0.5cm}
+\begin{tabular}{lccccc}  
 \toprule
-Component & Peak Power & Idle Power & Avg Power & Max Current & Voltage & Weight & Height & Length & Width & Cooling & Total Cost & Notes \\
-\hline
-CPU Node 1 & 670W & 150W & 410W & 35A & 220V & 15kg & 2U & 720mm & 430mm & Air & \$12,000 & Base config \\
-GPU Node 1 & 850W & 180W & 515W & 45A & 220V & 18kg & 2U & 720mm & 430mm & Air & \$25,000 & With 1x H100 \\
-GPU Node 2 & 1200W & 220W & 710W & 65A & 220V & 22kg & 2U & 720mm & 430mm & Liquid & \$45,000 & With 2x H100 \\
+Component & Weight & Height & Length & Width & Cooling \\
+\midrule 
+CPU Node 1 & 15kg & 2U & 720mm & 430mm & Air \\
+GPU Node 1 & 18kg & 2U & 720mm & 430mm & Air \\
+GPU Node 2 & 22kg & 2U & 720mm & 430mm & Liquid \\
 \bottomrule
 \end{tabular}
-}
-\caption{Hardware Specifications of Cluster Nodes}
-\label{tab:hardware_specs}
-\end{table*}
+\caption{Physical Specifications of Cluster Nodes}
+\end{table}
+
+\begin{table}[H] 
+\centering
+\vspace{0.5cm}
+\begin{tabular}{lccccc}
+\toprule
+Component & Peak & Idle & Avg & Cost & Notes \\
+\midrule
+CPU Node 1 & 670W & 150W & 410W & \$12K & Base \\
+GPU Node 1 & 850W & 180W & 515W & \$25K & +1 H100 \\
+GPU Node 2 & 1200W & 220W & 710W & \$45K & +2 H100 \\
+\bottomrule
+\end{tabular}
+\caption{Power and Cost Specifications of Cluster Nodes}
+\end{table}
 
 \begin{table}[htbp]
 \small
@@ -339,94 +336,109 @@ Storage & 2 & 128GB & 33TB & 1GbE+IB \\
 According to the power calculator on Inspur's official website, the power consumption of the predecessor NF5280M6 of the NF5280M7 server we used is shown in the table below:
 \begin{table}[H]
 \centering
-\caption{NF5280M6 Power Consumption}
 \vspace{0.5cm}
-\begin{tabular}{|l|l|}
+\begin{tabular}{cc}
 \toprule
 Loads & Power consumption \\
 \midrule
 100\% & 695.88W \\
-\hline
 50\% & 433.00W \\
-\hline
 25\% & 304.15W \\
-\hline
 0\% & 177.68W \\
 \bottomrule
 \end{tabular}
+\caption{NF5280M6 Power Consumption}
 \end{table}
 
 Therefore, after comparing the differences between the servers, we presume the power consumption of the CPU 1 node and the GPU 1 node (without the GPU) to be
 \begin{table}[H]
 \centering
-\caption{NF5280M7 Power Consumption with Xeon 6538Y+}
 \vspace{0.5cm}
-\begin{tabular}{|l|l|}
+\begin{tabular}{cc}
 \toprule
 Load & Power consumption \\
 \midrule
 100\% & 670W \\
-\hline
 50\% & 410W \\
-\hline
 25\% & 285W \\
-\hline
 0\% & 150W \\
 \bottomrule
 \end{tabular}
+\caption{NF5280M7 Power Consumption with Xeon 6538Y+}
 \end{table}
 
 All node power consumption in the power consumption data below is assumed from the table above.
 
-\textbf{CPU Mode:}
-
-\textbf{GPU Mode:}
 \begin{table}[H]
 \centering
-\caption{Power Consumption in GPU mode}
 \vspace{0.5cm}
-\begin{tabular}{|l|l|}
+\begin{tabular}{lccc}  % 移除竖线
+\toprule
+Component & Power consumption \\
+\midrule
+4 Nodes & 2680W \\
+InfiniBand Switch & 100W \\
+Ethernet Switch & 20W \\
+Total Power & 2800W \\
+\bottomrule
+\end{tabular}
+\caption{Power Consumption in CPU mode}
+\end{table}
+
+\begin{table}[H]
+\centering
+\vspace{0.5cm}
+\begin{tabular}{lccc}  % 移除竖线
 \toprule
 Component & Power consumption \\
 \midrule
 4 Nodes & 2780W \\
-\hline
 InfiniBand Switch & 100W \\
-\hline
 Ethernet Switch & 20W \\
-\hline
 GPU(Idle) & 100W \\
-\hline
 Total Power & 3000W \\
 \bottomrule
 \end{tabular}
+\caption{Power Consumption in GPU mode}
 \end{table}
 
 We use Flops (floating point operations per second) to estimate the theoretical performance of the cluster.
+The Xeon 6530 and 6530Y+ CPU has:
+\begin{itemize}
+    \item 2 FMA engines per core (Fused Multiply-Add units)
+    \item 8 lanes per FMA engine (SIMD vector width)  
+    \item 2 floating point operations per cycle (1 multiply + 1 add)
+    \item 32 cores per CPU
+    \item 2 CPU sockets per node
+    \item 4 nodes total
+    \item 2.6 GHz clock frequency
+\end{itemize}
 
-The Xeon 6530 and 6530Y+ CPU has 2 FMA engines per core. Each FMA engine has 8 lanes and each lane can perform 2 floating point operations per cycle. In this way, we estimate the theoretical performance to be:
-\begin{equation*}
-2\;\text{FMA} \times 8\;\text{lanes} \times 2\;\text{Flops/cycle} \times 32\;\text{cores} \times 2\;\text{sockets} \times 4\;\text{nodes} \times 2.6\;\text{GHz} = 21299.2 \;\text{GFlops} = 21.2992 \;\text{TFlops}
-\end{equation*}
+\begin{align*}
+\text{FMA operations per cycle} &= 2\;\text{FMA} \times 8\;\text{lanes} \times 2\;\text{Flops/cycle} = 32\;\text{Flops/cycle/core} \\
+\text{Per CPU} &= 32\;\text{Flops/cycle/core} \times 32\;\text{cores} = 1024\;\text{Flops/cycle} \\
+\text{Per node} &= 1024\;\text{Flops/cycle} \times 2\;\text{sockets} = 2048\;\text{Flops/cycle} \\
+\text{Cluster total} &= 2048\;\text{Flops/cycle} \times 4\;\text{nodes} \times 2.6\;\text{GHz} \\
+&= 21299.2\;\text{GFlops} = 21.2992\;\text{TFlops}
+\end{align*}
 
-n GPU mode, the floating-point performance of a single H100 card is 51.22 TFlops, so the floating-point performance of the entire cluster is:
+As the floating-point performance of a single H100 card is 51.22 TFlops, so the floating-point performance of the entire cluster is:
 \begin{equation*}
 51.22\;\text{TFlops} \times 5 = 256.1 \;\text{TFlops}
 \end{equation*}
 
 \begin{table}[H]
 \centering
-\caption{Cluster Performance}
 \vspace{0.5cm}
-\begin{tabular}{|l|l|}
+\begin{tabular}{ll}
 \toprule
 Mode & Performance \\
 \midrule
 CPU & 21.2922 TFlops \\
-\hline
 GPU & 256.1 TFlops \\
 \bottomrule
 \end{tabular}
+\caption{Cluster Performance In Theorey}
 \end{table}
 
 During the formation of the cluster, we used the server power calculation tool provided by Inspur to more accurately estimate power consumption. The cluster uses InfiniBand, a high-performance communication technology protocol with lower latency, greater bandwidth, and higher reliability for more powerful I/O performance, which is ideal for high-speed interconnection of nodes in a cluster. In addition, we have introduced NVLink technology in GPU nodes. NVLink technology provide high-speed interconnections between GPUs and CPUs for NVIDIA H100 graphics cards, and it is more than seven times faster than PCIe bandwidth compared to traditional PCIe links. This also makes it ideal for GPU-intensive high-performance computing. However, the cluster we built still has some shortcomings. At the software level, we did not use the latest packages (e.g., we used Intel oneAPI 2022 instead of 2023), which introduces support for new architectures but can also lead to compatibility issues, as was the case with some of the questions in the ASC competition. Also, at the hardware level, the H100 GPUs we used do not perform optimally in this power constraint and network topology, which is more noticeable when performing scenarios that require multi-card collaboration such as LLM training.
@@ -437,36 +449,32 @@ During the formation of the cluster, we used the server power calculation tool p
 
 \begin{table}[H]
 \centering
-\caption{Hardware Configuration}
 \vspace{0.5cm}
-\begin{tabular}{|l|l|}
+\begin{tabular}{ll}
 \toprule
-Item & Configuration \\
+Hardware & Configuration \\
 \midrule
 CPU & Intel Xeon Gold 5218R x2 \\
-\hline
 Memory & DDR3 128GB \\
 \bottomrule
 \end{tabular}
+\caption{Hardware Configuration}s
 \end{table}
 
 \begin{table}[H]
 \centering
-\caption{Software Configuration}
 \vspace{0.5cm}
-\begin{tabular}{|l|l|}
+\begin{tabular}{ll}
 \toprule
-Item & Configuration \\
+Software & Configuration \\
 \midrule
 OS & CentOS 7.9.2009 \\
-\hline
 Compiler & Intel mpiicc 2021.11 \\
-\hline
 Math Library & Intel Math Kernel Library 2024.0 \\
-\hline
 MPI & Intel MPI Library 2021.11 \\
 \bottomrule
 \end{tabular}
+\caption{Software Configuration}
 \end{table}
 
 
@@ -664,7 +672,7 @@ Finally, the best parameter settings obtained through the test are as follows:
 \centering
 \caption{Parameter settings}
 \vspace{0.5cm}
-\begin{tabular}{|l|l|l|l|}
+\begin{tabular}{llll}
 \toprule
 N & NB & P & Q \\
 \midrule
@@ -785,13 +793,35 @@ Through code analysis and observation of program execution results, we found tha
 \textbf{Model Inference Phase:} Used jax compilation cache directory to cache compiled functions and model parameters, reducing compilation time during model inference. \\
 \textbf{Feature Extraction Phase:} Defined \texttt{FeatureCache} class to cache feature data, reducing repeated computations and memory usage. Implemented \texttt{optimize\_features} function to optimize data types and memory layout, \texttt{compress\_features} function to compress feature data, and parallel processing of feature data to reduce runtime.
 
-\subsubsection{Optimization Methods}
 Defined \texttt{create\_model\_runner} function to configure jax environment, including disabling 64-bit operations and setting thread count. Implemented \texttt{\_post\_process\_result} function for optimizing result processing and data type conversion. Created \texttt{ModelRunner} class with \texttt{\_split\_batch}, \texttt{run\_inference}, and \texttt{\_merge\_results} functions for dynamic batch processing, parallel model inference, and parallel result merging. Implemented \texttt{NumericsHandler} class with \texttt{handle\_coordinate\_numerics}, \texttt{handle\_general\_numerics}, and \texttt{check\_output\_numerics} functions for detecting and handling NaN/Inf values. Developed \texttt{CacheManager} class with \texttt{\_get\_cache\_key}, \texttt{\_serialize\_value}, \texttt{\_deserialize\_value}, and \texttt{put} functions for cache management. Created \texttt{MemoryManager} class with \texttt{get\_memory\_usage}, \texttt{update}, \texttt{cleanup}, and \texttt{monitor} functions for memory management.
 
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.8\textwidth, bb=0 0 800 600]{alphafold3-workflow.svg}
+    \caption{Optimized Method Workflow Diagram}
+    \label{fig:optim_flow_v2}
+\end{figure}
+
+
 \subsubsection{Optimization Results}
-\textbf{Before optimization:} Total runtime: 3651.96s, Model inference: 3353.36s, Feature extraction: 298.60s. \\
-\textbf{After optimization:} Total runtime: 3149.68s, Model inference: 3042.80s, Feature extraction: 106.88s. \\
-\textbf{Total improvement:} 13.7\%, Model inference improvement: 9.3\%, Feature extraction improvement: 66.9\%.
+
+\begin{table}[H]
+\centering
+\caption{Optimization Results}
+\vspace{0.5cm}
+\begin{tabular}{lccc}
+\toprule
+ & Total Runtime (s) & Model Inference (s) & Feature Extraction (s) \\
+\midrule
+Before Optimization & 3651.96 & 3353.36 & 298.60 \\
+After Optimization & 3149.68 & 3042.80 & 106.88 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\textbf{Speedup Ratio:} 13.7\% \\
+\textbf{Model Inference Improvement:} 9.3\% \\
+\textbf{Feature Extraction Improvement:} 66.9\%
 
 \subsection{CPU Inference Optimization}
 

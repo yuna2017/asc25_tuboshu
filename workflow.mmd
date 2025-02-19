@@ -1,0 +1,29 @@
+%%{init: {'theme': 'neutral', 'themeVariables': { 'primaryColor': '#fff3e0', 'fontSize': 24px}}}%%
+
+flowchart TB
+    classDef default stroke-width:2px, font-size: 32px, font-family: Calibri;
+
+    subgraph Model Inference Phase
+        A[Start] --> B[create_model_runner]
+        B --> C[_split_batch]
+        C --> D[run_inference]
+        D --> E[_merge_results]
+    end
+
+    subgraph Feature Extraction Phase
+        F[FeatureCache] --> G[optimize_features]
+        G --> H[compress_features]
+        H --> I[Parallel Processing]
+    end
+
+    classDef stage fill:#ffe0b2,stroke:#f57c00, font-size: 32px, font-family: Calibri;
+    classDef component fill:#c8e6c9,stroke:#2e7d32, font-size: 32px, font-family: Calibri;
+    classDef system fill:#bbdefb,stroke:#1976d32, font-size: 32px, font-family: Calibri;
+
+    A --> F
+    E --> J[Output Results]
+    I --> J
+
+    N[NumericsHandler]:::system --> D
+    K[CacheManager]:::system --> F
+    M[MemoryManager]:::system --> I   
