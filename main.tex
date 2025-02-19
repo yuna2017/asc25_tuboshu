@@ -4,6 +4,7 @@
 % Essential packages
 \usepackage{geometry}
 \usepackage{graphicx}
+\usepackage[export]{adjustbox}  % Add this line
 \usepackage{xeCJK}
 \usepackage{titlesec}
 \usepackage{booktabs}
@@ -20,7 +21,8 @@
     top=25mm,
     bottom=25mm,
     left=25mm,
-    right=25mm
+    right=25mm,
+    headheight=14.5pt    % Added headheight setting
 }
 
 % Header and footer style
@@ -60,6 +62,12 @@
 \author{}
 \date{\vfill January 8, 2025}
 
+% 在导言区添加
+\tolerance=1000
+\emergencystretch=\maxdimen
+\hyphenpenalty=10000
+\hbadness=10000
+
 \begin{document}
 
 \maketitle
@@ -84,7 +92,7 @@ The supercomputing center adopts a mature and general system architecture, which
 \begin{table}[H]
 \centering
 \caption{The main configurations}
-\begin{tabular}{|l|l|l|p{6cm}|}
+\begin{tabular}{|l|l|l|p{5.5cm}|}  % 减小最后一列宽度
 \hline
 Type & Number(Desk) & Name & Description \\
 \hline
@@ -92,11 +100,13 @@ Management & 1 & mgt1 &  \\
 \hline
 Login node & 1 & login &  \\
 \hline
-Compute node & 30 & node1-node30 & 2 Intel E5-2683v3 processors (28 Cores 2.0Ghz), 64GB DDR4 ECC REG memory, Infiniband QDR 40Gb/s high-speed network \\
+Compute node & 30 & node1-node30 & 2 Intel E5-2683v3 processors, 28 Cores 2.0Ghz, 
+64GB DDR4 ECC REG memory, Infiniband QDR 40Gb/s network \\  % 拆分长行
 \hline
-GPU Visual Node & 2 & GPU1,GPU2 & 2 Intel E5-2683v3 Processors (28 Cores 2.0Ghz), 128GB DDR4 ECC REG memory, Infiniband QDR 40Gb/s high-speed network, NVIDIA TitanX GPU \\
+GPU Visual Node & 2 & GPU1,GPU2 & 2 Intel E5-2683v3 Processors, 28 Cores 2.0Ghz, 
+128GB DDR4 ECC REG memory, Infiniband QDR 40Gb/s network, NVIDIA TitanX GPU \\  % 拆分长行
 \hline
-IO node & 2 & gpfs1,nfs & Gpfs1 capacity available 18TB available 15TB, nfs capacity \\
+IO node & 2 & gpfs1,nfs & Gpfs1 capacity 18TB, nfs capacity \\
 \hline
 \end{tabular}
 \end{table}
@@ -159,22 +169,44 @@ The five members of our team consisted of one senior and four sophomores, and al
 \subsection{Team Members}
 \begin{table}[H]
 \centering
-\caption{Team members}
-\begin{tabular}{|l|l|l|}
-\hline
-Name & Photos & Personal Introduction \\
-\hline
-Jin Chenye & \includegraphics[width=0.2\textwidth]{Jin_Chenye.png} & He is a sophomore majoring in software engineering. He is highly accomplished in algorithms, artificial intelligence, and other software engineering skills. He has won many awards in algorithm competitions and artificial intelligence.He is one of the main responsible for the operation and maintenance of the GPU cluster in the school. \\
-\hline
-Li Wangyang & \includegraphics[width=0.2\textwidth]{Li_Wangyang.png} & He is a sophomore majoring in software engineering. He has made great achievements in the field of high performance computing and parallel computing. He is one of the main leaders of the GPU cluster operation and maintenance in the school, and has rich operation and maintenance experience. \\
-\hline
-Cui Shuyang & \includegraphics[width=0.2\textwidth]{Cui_Shuyang.png} & He is a sophomore majoring in software engineering. He specializes in high performance computing testing, parallel computing, artificial intelligence algorithms, etc. He is also one of the main heads of the GPU cluster operation and maintenance in the school. \\
-\hline
-Li Jinze & \includegraphics[width=0.2\textwidth]{Li_Jinze.png} & He is a senior majoring in software engineering. He specializes in high performance computing testing, parallel computing, and artificial intelligence algorithms. He is not only strong, but also has a wealth of experience in the competition, which is one of the core of this cmpetition. \\
-\hline
-Fang Yi & \includegraphics[width=0.2\textwidth]{Fang_Yi.png} & He is a sophomore in the software engineering department. He is good at algorithms and has a great interest in high performance computing and parallel computing. He kept learning and improving in this competition, and used his knowledge to solve problems. \\
-\hline
-\end{tabular}
+\begin{center}
+\begin{minipage}{0.45\textwidth}
+    \centering
+    \includegraphics[width=0.5\textwidth]{Jin_Chenye.png}\\[0.3cm]
+    \textbf{Jin Chenye}\\[0.3cm]
+    \small{Skilled in algorithms and AI, with expertise in GPU cluster operations.}
+\end{minipage}
+\begin{minipage}{0.45\textwidth}
+    \centering
+    \includegraphics[width=0.5\textwidth]{Li_Wangyang.png}\\[0.3cm]
+    \textbf{Li Wangyang}\\[0.3cm]
+    \small{Experienced in high-performance computing and parallel programming.}
+\end{minipage}
+
+\vspace{1cm}
+
+\begin{minipage}{0.45\textwidth}
+    \centering
+    \includegraphics[width=0.5\textwidth]{Cui_Shuyang.png}\\[0.3cm]
+    \textbf{Cui Shuyang}\\[0.3cm]
+    \small{Specializes in HPC testing, parallel computing, and AI algorithms.}
+\end{minipage}
+\begin{minipage}{0.45\textwidth}
+    \centering
+    \includegraphics[width=0.5\textwidth]{Li_Jinze.png}\\[0.3cm]
+    \textbf{Li Jinze}\\[0.3cm]
+    \small{Expertise in HPC testing, parallel computing, and machine learning.}
+\end{minipage}
+
+\vspace{1cm}
+
+\begin{minipage}{0.45\textwidth}
+    \centering
+    \includegraphics[width=0.5\textwidth]{Fang_Yi.png}\\[0.3cm]
+    \textbf{Fang Yi}\\[0.3cm]
+    \small{Skilled in algorithms and parallel computing.}
+\end{minipage}
+\end{center}
 \end{table}
 \begin{figure}[H]
     \centering
@@ -395,14 +427,15 @@ HPL is a software package that solves a (random) dense linear system using doubl
 The HPL package includes a testing and timing program that measures the accuracy and speed of the solution. The performance of this software on your system depends on many factors. However, with some assumptions on the interconnection network, the algorithm and its implementation described here are scalable, meaning that their parallel efficiency remains constant with the per processor memory usage.
 
 \textbf{2.2.2 Test Principle}
-When the matrix size is N, time of floating point arithmetic is:
-\begin{equation*}
-3/2 \times N \times N \times N - 2 \times N \times N
-\end{equation*}
-Therefore, as the problem size N is given, and the time T of system calculation is measured, the system performance can be estimated according to the following formula (unit flops, number of floating point arithmetic completed per second)
-\begin{equation*}
-performance = number/time = (3/2 \times N \times N \times N - 2 \times N \times N) / T
-\end{equation*}
+When the matrix size is N, the total number of floating point operations is:
+\begin{equation}
+    \boxed{N_{flop} = \frac{2N^3}{3} + 2N^2}
+\end{equation}
+
+Therefore, given the problem size N and measured execution time T, the system performance (in FLOPS) can be calculated as:
+\begin{equation}
+    \text{Performance} = \frac{N_{flop}}{T} = \frac{\frac{2N^3}{3} + 2N^2}{T} \quad \text{FLOPS}
+\end{equation}
 
 \textbf{2.2.3 HPL Algorithm Analysis}
 The algorithm used by HPL can be summarized by the following keywords: Two-dimensional block-cyclic data distribution - Right-looking variant of the LU factorization with row partial pivoting featuring multiple look-ahead depths Recursive panel factorization with pivot search and column broadcast combined - Various virtual panel broadcast topologies bandwidth reducing swap-broadcast algorithm backward substitution with look-ahead of depth.
@@ -525,7 +558,21 @@ We have 40 processors in total, so we tried several pairs of P and Q and make su
 
 It is found that the performance is better when P is 4 and Q is 10. P=5 and Q=8 is also a good choice.
 
-\textbf{2.2.5HPL Performance Evaluation}
+\textbf{2.2.5 HPL Performance Evaluation} 
+The theoretical peak double precision floating-point performance can be calculated as:
+\begin{equation}
+    \begin{split}
+        P_{peak} &= \text{cores} \times \text{frequency} \times \text{FLOPs/cycle} \times \text{sockets} \\
+        &= 20 \times 2.1\text{ GHz} \times 16 \times 2 \\
+        &= 1344 \text{ GFLOPS}
+    \end{split}
+\end{equation}
+
+With our optimal parameter settings achieving 803.698 GFLOPS, the HPL efficiency ratio is:
+\begin{equation}
+    \text{Efficiency} = \frac{P_{achieved}}{P_{peak}} = \frac{1082.5}{1344} \approx 80.54\%
+\end{equation}
+
 Due to the limitation of objective conditions, HPL test is only conducted at a single computing node without GPU acceleration. The peak value of theoretical double precision floating-point calculation is as follows:
 \begin{equation*}
 Peak = 2 \times 20 \times 2.1GHz \times 16Flops/cycle = 1344Glops
