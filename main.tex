@@ -132,9 +132,9 @@ R_{peak} = N_{cores} \times N_{flops/cycle} \times F_{clock}
 
 Where:
 \begin{itemize}
-    \item $N_{cores}$ is the total number of CPU cores
-    \item $N_{flops/cycle}$ is the number of floating-point operations per cycle
-    \item $F_{clock}$ is the clock frequency in Hz
+    \item \(N_{cores}\) is the total number of CPU cores
+    \item \(N_{flops/cycle}\) is the number of floating-point operations per cycle
+    \item \(F_{clock}\) is the clock frequency in Hz
 \end{itemize}
 
 \newpage
@@ -197,16 +197,118 @@ Where:
 
 \subsection{Optimization for AlphaFold3 Inference}
 
-\subsubsection{GPU Inference Optimization}
-% 在这里添加关于优化GPU推理过程以最小化推理时间的内容
+\subsection{GPU Inference Optimization}
 
-\subsubsection{CPU Inference Optimization}
-% 在这里添加关于将推理代码库从GPU迁移到CPU架构并优化以最小化CPU推理时间的内容
+\subsubsection{Model Deployment}
+Since the program requires more than 18GB of video memory, we chose to deploy the model on the YSU HPC supercomputing cluster. Dependencies were installed according to the official dockerfile documentation. Due to the cluster's CUDA driver version being 12.0, which differs from the dockerfile's 12.6, we needed to select a different jax version. According to the \href{https://docs.jax.dev/en/latest/installation.html#nvidia-gpu}{jax installation documentation}, we used the following commands to install jax:
 
-\subsubsection{Inference Results}
-% 在这里添加关于在GPU和CPU上分别运行所有十二个输入案例并上传结果的内容
+\begin{lstlisting}[language=bash]
+pip install --upgrade pip
+pip install --upgrade "jax[cuda12]"
+\end{lstlisting}
 
-\subsection{RNA m5C Modification Site Detection and Performance Optimization Challenge}
+After installation, the jax version is 0.5.0, which differs from the version required in the dockerfile but still runs normally.
+
+\subsubsection{Hardware Configuration}
+Using the compute01 node of the supercomputing cluster, which is configured with: CPU: Intel Xeon Gold 5218R @ 2.10GHz, GPU: 2* NVIDIA GeForce 3090 24G, RAM: 125G.
+
+\subsubsection{Environment Variables Setup}
+\begin{lstlisting}[language=bash]
+export XLA_PYTHON_CLIENT_MEM_FRACTION=0.95
+export JAX_TRACEBACK_FILTERING=off
+\end{lstlisting}
+
+\subsubsection{Program Execution Command}
+\begin{lstlisting}[language=bash]
+python ./run_alphafold.py \
+? --input_dir=/input_dir \
+? --output_dir=/output_dir \
+? --model_dir=/model_dir \
+? --norun_data_pipeline \
+? --num_recycles=3 \
+? --flash_attention_implementation=xla
+\end{lstlisting}
+
+\subsubsection{Program Results}
+See cluster files for details.
+
+\subsection{Program Optimization}
+
+\subsubsection{Optimization Strategy Overview}
+Through code analysis and observation of program execution results, we found that the model inference phase accounts for over 95\% of the total runtime. Therefore, we prioritized optimizing the model inference time. Additionally, we identified optimization opportunities in the feature extraction phase.
+
+\subsubsection{Optimization Methods}
+\textbf{Model Inference Phase:} Used jax compilation cache directory to cache compiled functions and model parameters, reducing compilation time during model inference. \\
+\textbf{Feature Extraction Phase:} Defined \texttt{FeatureCache} class to cache feature data, reducing repeated computations and memory usage. Implemented \texttt{optimize\_features} function to optimize data types and memory layout, \texttt{compress\_features} function to compress feature data, and parallel processing of feature data to reduce runtime.
+
+\subsubsection{Optimization Methods}
+Defined \texttt{create\_model\_runner} function to configure jax environment, including disabling 64-bit operations and setting thread count. Implemented \texttt{\_post\_process\_result} function for optimizing result processing and data type conversion. Created \texttt{ModelRunner} class with \texttt{\_split\_batch}, \texttt{run\_inference}, and \texttt{\_merge\_results} functions for dynamic batch processing, parallel model inference, and parallel result merging. Implemented \texttt{NumericsHandler} class with \texttt{handle\_coordinate\_numerics}, \texttt{handle\_general\_numerics}, and \texttt{check\_output\_numerics} functions for detecting and handling NaN/Inf values. Developed \texttt{CacheManager} class with \texttt{\_get\_cache\_key}, \texttt{\_serialize\_value}, \texttt{\_deserialize\_value}, and \texttt{put} functions for cache management. Created \texttt{MemoryManager} class with \texttt{get\_memory\_usage}, \texttt{update}, \texttt{cleanup}, and \texttt{monitor} functions for memory management.
+
+\subsubsection{Optimization Results}
+\textbf{Before optimization:} Total runtime: 3651.96s, Model inference: 3353.36s, Feature extraction: 298.60s. \\
+\textbf{After optimization:} Total runtime: 3149.68s, Model inference: 3042.80s, Feature extraction: 106.88s. \\
+\textbf{Total improvement:} 13.7\%, Model inference improvement: 9.3\%, Feature extraction improvement: 66.9\%.
+
+\subsection{CPU Inference Optimization}
+
+\subsubsection{Model Deployment}
+Since the CPU version requires over 100GB of memory for large inputs, we chose to deploy the model on the login node of the YSU HPC supercomputing cluster, with the same deployment process as the GPU version.
+
+\subsubsection{Hardware Configuration}
+Using the login node configured with: CPU: Intel Xeon Gold 5218R @ 2.10GHz, RAM: 125G.
+
+\subsubsection{Environment Variables Setup}
+\begin{lstlisting}[language=bash]
+export MKL_DEBUG_CPU_TYPE=5
+export MKL_ENABLE_INSTRUCTIONS=AVX2
+export KMP_AFFINITY="granularity=fine,compact,1,0"
+export MKL_DYNAMIC=FALSE
+\end{lstlisting}
+\begin{lstlisting}[language=python]
+import os
+os.environ['JAX_PLATFORMS'] = 'cpu'      	
+os.environ['JAX_SKIP_ROCM_TESTS'] = '1'   	
+os.environ['JAX_SKIP_TPU_TESTS'] = '1'  		
+os.environ['JAX_LOG_COMPILES'] = '0'  		
+os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'
+\end{lstlisting}
+
+\subsubsection{Program Execution Command}
+Same as GPU version.
+
+\subsubsection{Program Results}
+See cluster files for details.
+
+\subsection{Program Optimization}
+
+\subsubsection{Optimization Strategy Overview}
+Through code analysis, we identified optimization opportunities in memory usage and CPU communication. We also found NaN/Inf values during program execution that needed handling.
+
+\subsubsection{Optimization Methods}
+Defined create\_model\_runner function to configure jax environment, including disabling 64-bit operations and setting thread count. Implemented \_post\_process\_result function for optimizing result processing and data type conversion. Created ModelRunner class with \_split\_batch, run\_inference, and \_merge\_results functions for dynamic batch processing, parallel model inference, and parallel result merging. Implemented NumericsHandler class with handle\_coordinate\_numerics, handle\_general\_numerics, and check\_output\_numerics functions for detecting and handling NaN/Inf values. Developed CacheManager class with \_get\_cache\_key, \_serialize\_value, \_deserialize\_value, and put functions for cache management. Created MemoryManager class with get\_memory\_usage, update, cleanup, and monitor functions for memory management.
+
+\subsubsection{Optimization Results}
+Before optimization: Total runtime: 44102.1s
+After optimization: Total runtime: 43929.5s
+Total improvement: 0.4\%, potentially limited by memory bandwidth based on CPU usage during runtime.
+
+\subsection{Program Execution Process}
+
+\subsubsection{Input Processing}
+First, receives input in JSON format describing target molecule composition and experimental conditions, then sets parameters such as cycle count and diffusion sample number based on command-line arguments.
+
+\subsubsection{Feature Extraction}
+Performs MSA, filters structure templates based on sequence similarity and publication date, loads CCD and RDKit for non-standard residue processing and small molecule ligand 3D conformation generation, then encodes these into multidimensional vectors.
+
+\subsubsection{Model Inference}
+Processes sequence and pairing features, generates atomic coordinates, then performs iterative optimization through multiple cycles, using previous prediction results as input for each iteration.
+
+\subsubsection{Result Processing}
+Decodes atomic coordinates from model output Frame Transforms, calculates local bond lengths and angles, normalizes results, performs confidence assessment, and finally outputs 3D structures as PDB files.
+
+\newpage
+
+\section{RNA m5C Modification Site Detection and Performance Optimization Challenge}
 
 \subsubsection{Workflow Description}
 % 在这里添加关于工作流描述文件的内容
