@@ -1,0 +1,262 @@
+% !TEX program = xelatex
+\documentclass[a4paper,12pt]{article}
+
+% Essential packages
+\usepackage{geometry}
+\usepackage{graphicx}
+\usepackage{xeCJK}
+\usepackage{titlesec}
+\usepackage{booktabs}
+\usepackage{listings}
+\usepackage{float}
+\usepackage{hyperref}
+\usepackage{enumitem}
+\usepackage{fancyhdr}
+\usepackage{lastpage}
+
+% Page geometry
+\geometry{
+    top=25mm,
+    bottom=25mm,
+    left=25mm,
+    right=25mm
+}
+
+% Header and footer style
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[R]{\thepage\ of \pageref{LastPage}}
+\renewcommand{\headrulewidth}{0pt}
+
+% Title formatting
+\titleformat{\section}
+  {\normalfont\Large\bfseries}{\thesection}{1em}{}
+\titleformat{\subsection}
+  {\normalfont\large\bfseries}{\thesubsection}{1em}{}
+
+% Code listing style
+\lstset{
+    basicstyle=\small\ttfamily,
+    numbers=left,
+    numberstyle=\tiny,
+    frame=single,
+    breaklines=true
+}
+
+% Document info
+\title{
+    \includegraphics[width=0.4\textwidth]{ysu-logo.png}\\[1cm] % logo
+    {\LARGE Proposal For ASC 25}\\[0.5cm]
+    \large Team Name: \texttt{[Team Name]}\\[1cm] % 使用占位符
+    \begin{tabular}{c}
+        \large Team Member 1 \\
+        \large Team Member 2 \\
+        \large Team Member 3 \\
+        \large Team Member 4 \\
+        \large Team Member 5
+    \end{tabular}
+}
+\author{}
+\date{\vfill January 8, 2025}
+
+\begin{document}
+
+\maketitle
+\thispagestyle{empty}
+\vfill
+\begin{center}
+    \textit{A proposal submitted to the ASC 25 committee}
+\end{center}
+\newpage
+
+\tableofcontents
+\addtocontents{toc}{\protect\enlargethispage{\baselineskip}}
+\newpage
+
+\section{Brief Background Description of Supercomputing Activities}
+
+\subsection{Hardware and Software Platforms}
+Our university established a high-performance computational (HPC) cluster in 2025 to address the growing demands in scientific research and industrial applications. Here's an example of how to include technical specifications:
+
+\begin{table}[H]
+\centering
+\caption{Hardware Configuration of YSU HPC Cluster}
+\begin{tabular}{llll}
+\toprule
+Item & Name & Configuration & Number \\
+\midrule
+Login Node & [Model] & CPU: [Specs] & 1 \\
+Compute Node & [Model] & CPU: [Specs] & 10 \\
+GPU Node & [Model] & GPU: [Specs] & 2 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Example Code Block}
+Here's how to include code samples in the document:
+
+\begin{lstlisting}[language=Python, caption=HPL Performance Testing Script]
+def test_hpl_performance(problem_size, block_size):
+    """
+    Test HPL performance with given parameters
+    """
+    results = []
+    for size in problem_size:
+        perf = run_hpl_benchmark(size, block_size)
+        results.append((size, perf))
+    return results
+\end{lstlisting}
+
+\subsection{Example Figure}
+Example of including a figure with caption:
+
+\begin{figure}[H]
+\centering
+% 可以插入图像文件，也可以使用 LaTeX 绘图包生成图像
+% \includegraphics[width=0.8\textwidth]{example-performance-graph.png}
+This is a placeholder for the performance graph
+\caption{HPL Performance Scaling Analysis}
+\label{fig:performance}
+\end{figure}
+
+\newpage
+
+\section{Design of HPC System}
+
+\subsection{Performance Analysis}
+Example of including mathematical equations:
+
+\begin{equation}
+R_{peak} = N_{cores} \times N_{flops/cycle} \times F_{clock}
+\end{equation}
+
+Where:
+\begin{itemize}
+    \item $N_{cores}$ is the total number of CPU cores
+    \item $N_{flops/cycle}$ is the number of floating-point operations per cycle
+    \item $F_{clock}$ is the clock frequency in Hz
+\end{itemize}
+
+\newpage
+
+\section{Introduction to the University's Activities in Supercomputing}
+
+\subsection{Supercomputing-related Hardware and Software Platforms}
+% ...existing content...
+
+\subsection{Supercomputing-related Courses, Trainings, and Interest Groups}
+% 在这里添加关于课程、培训和兴趣小组的描述
+
+\subsection{Supercomputing-related Research and Applications}
+% 在这里添加关于研究和应用的描述
+
+\subsection{Key Achievements in Supercomputing Research}
+% 在这里简要描述不超过两项的关键成就
+
+\newpage
+
+\section{Team Introduction}
+
+\subsection{Team Setup}
+% 在这里简要描述团队设置
+
+\subsection{Team Members}
+% 在这里介绍每个成员并附上照片，包括团队合影
+
+\subsection{Team Motto}
+% 在这里添加团队的座右铭或口号
+
+\newpage
+
+\section{Technical Proposal Requirements}
+
+\subsection{Design of HPC System}
+
+\subsubsection{Theoretical Design of an HPC Cluster}
+% 在这里添加关于HPC集群理论设计的内容
+
+\subsubsection{Software and Hardware Configurations}
+% 在这里添加关于软件和硬件配置的内容
+
+\subsubsection{Interconnection, Power Consumption, Performance Evaluation, and Architecture Analysis}
+% 在这里添加关于互连、功耗、性能评估和架构分析的内容
+
+\subsection{HPL and HPCG Benchmarks}
+
+\subsubsection{Software Environment}
+% 在这里添加关于软件环境的描述
+
+\subsubsection{Performance Optimization and Testing Methods}
+% 在这里添加关于性能优化和测试方法的内容
+
+\subsubsection{Performance Measurement and Problem/Solution Analysis}
+% 在这里添加关于性能测量和问题/解决方案分析的内容
+
+\subsubsection{In-depth Analysis of HPL and HPCG Algorithms and Source Codes}
+% 在这里添加关于HPL和HPCG算法和源代码的深入分析
+
+\subsection{Optimization for AlphaFold3 Inference}
+
+\subsubsection{GPU Inference Optimization}
+% 在这里添加关于优化GPU推理过程以最小化推理时间的内容
+
+\subsubsection{CPU Inference Optimization}
+% 在这里添加关于将推理代码库从GPU迁移到CPU架构并优化以最小化CPU推理时间的内容
+
+\subsubsection{Inference Results}
+% 在这里添加关于在GPU和CPU上分别运行所有十二个输入案例并上传结果的内容
+
+\subsection{RNA m5C Modification Site Detection and Performance Optimization Challenge}
+
+\subsubsection{Workflow Description}
+% 在这里添加关于工作流描述文件的内容
+
+\subsubsection{m5C Sites File}
+% 在这里添加关于m5C位点文件的内容
+
+\subsubsection{Software Packaging}
+% 在这里添加关于将整个工作流打包成单个软件工具或容器的内容
+
+\subsubsection{Performance Optimization}
+% 在这里添加关于记录和提交从“cutseq”开始到工作流结束的时间的内容
+
+\newpage
+
+\section{Additional Materials}
+% 在这里添加关于HPL输出文件、HPCG输出文件、AlphaFold3推理挑战所需文件和RNA m5C挑战所需文件的内容
+
+\newpage
+
+\appendix
+\section{Additional Technical Details}
+\subsection{Configuration Files}
+Example of including configuration files:
+
+\begin{lstlisting}[language=bash, caption=HPL Configuration File]
+# Sample HPL.dat
+HPL.out      output file name
+6            device out (6=stdout,7=stderr,file)
+1            # of problems sizes (N)
+29000        Ns
+1            # of NBs
+256          NBs
+0            PMAP process mapping (0=Row-,1=Column-major)
+1            # of process grids (P x Q)
+2            Ps
+2            Qs
+16.0         threshold
+1            # of panel fact
+2            PFACTs (0=left, 1=Crout, 2=Right)
+\end{lstlisting}
+
+\newpage
+
+\section{References}
+\begin{thebibliography}{9}
+\bibitem{example}
+Author, \textit{Title of the Book}, Publisher, Year.
+\end{thebibliography}
+
+\newpage
+
+\end{document}
