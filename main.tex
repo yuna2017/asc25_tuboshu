@@ -93,10 +93,11 @@ The supercomputing center adopts a mature and general system architecture, which
 \begin{table}[H]
 \centering
 \caption{The main configurations}
+\vspace{0.5cm}
 \begin{tabular}{|l|l|l|p{7cm}|}  % 减小最后一列宽度
-\hline
+\toprule
 Type & Count & Name & Description \\
-\hline
+\midrule
 Management & 1 & mgt1 & System monitoring and job scheduling \\
 \hline
 Login node & 1 & login &  \\
@@ -108,7 +109,7 @@ GPU Node & 2 & GPU1,2 & 2 Intel E5-2683v3 Processors, 28 Cores 2.0Ghz,
 128GB DDR4 ECC REG memory, Infiniband QDR 40Gb/s network, NVIDIA TitanX GPU \\  % 拆分长行
 \hline
 IO node & 2 & gpfs1,nfs & GPFS parallel file system (18TB), NFS network storage \\
-\hline
+\bottomrule
 \end{tabular}
 \end{table}
 
@@ -117,10 +118,11 @@ The Supercomputing center supports the running of computing software such as Ans
 \begin{table}[H]
 \centering
 \caption{Software resources}
+\vspace{0.5cm}
 \begin{tabular}{|l|p{8cm}|}
-\hline
+\toprule
 Software Name & Description \\
-\hline
+\midrule
 Centos7.2 & Operating System Platform \\
 \hline
 NFSv4 & Web file system \\
@@ -144,7 +146,7 @@ Openmpi 2.0.2 & Open source Intel Parallel Messaging Library \\
 FFTW & FFTW (Fastest Fourier Transform in the West) \\
 \hline
 gromacs-5.1.4 & Molecular dynamics program \\
-\hline
+\bottomrule
 \end{tabular}
 \end{table}
 
@@ -254,10 +256,11 @@ The general single CPU node configuration is shown below:
 \begin{table}[H]
 \centering
 \caption{Single Node Configuration}
+\vspace{0.5cm}
 \begin{tabular}{|l|l|l|}
-\hline
+\toprule
 Component Name & Model & Num \\
-\hline
+\midrule
 Server & Inspur NF5280M7 & 1 \\
 \hline
 CPU & Intel Xeon 6530 & 2 \\
@@ -267,7 +270,7 @@ Memory & DDR5 32G & 16 \\
 HardDrive & SSD 480G & 1 \\
 \hline
 HCA & InfiniBand Mellanox ConnectX®-7 HDR & 1 \\
-\hline
+\bottomrule
 \end{tabular}
 \end{table}
 
@@ -298,34 +301,50 @@ For two GPU nodes, the GPUs in the nodes are connected to each other via NVIDIA 
     \label{fig:cluster_arch}
 \end{figure}
 
-\begin{table}[H]
+\begin{table*}[htbp]
 \centering
-\caption{Cluster software configuration}
-\begin{tabular}{|l|l|}
+\resizebox{1.0\textwidth}{!}{
+\begin{tabular}{l|cccc|ccc|ccc|c|c}
+\toprule
+Component & Peak Power & Idle Power & Avg Power & Max Current & Voltage & Weight & Height & Length & Width & Cooling & Total Cost & Notes \\
 \hline
-Item & Version \\
-\hline
-OS & CentOS 7.9 \\
-\hline
-Compiler & GCC 10, Intel oneAPI BaseKit 2022.3.1(icc) \\
-\hline
-Math Library & Intel oneAPI MKL 2022.2 \\
-\hline
-MPI & Intel oneAPI HPCKit 2022.3.1 \\
-\hline
-Other & NVIDIA Data Center Driver for Linux RHEL 7 verson 535 \\
-\hline
+CPU Node 1 & 670W & 150W & 410W & 35A & 220V & 15kg & 2U & 720mm & 430mm & Air & \$12,000 & Base config \\
+GPU Node 1 & 850W & 180W & 515W & 45A & 220V & 18kg & 2U & 720mm & 430mm & Air & \$25,000 & With 1x H100 \\
+GPU Node 2 & 1200W & 220W & 710W & 65A & 220V & 22kg & 2U & 720mm & 430mm & Liquid & \$45,000 & With 2x H100 \\
+\bottomrule
 \end{tabular}
+}
+\caption{Hardware Specifications of Cluster Nodes}
+\label{tab:hardware_specs}
+\end{table*}
+
+\begin{table}[htbp]
+\small
+\centering
+\resizebox{0.6\textwidth}{!}{
+\begin{tabular}{ccccc}
+\toprule
+Node Type & CPU Count & Memory & Storage & Network \\
+\midrule
+Management & 2 & 64GB & 480GB SSD & 1GbE+IB \\
+Compute & 2 & 512GB & 480GB SSD & 1GbE+IB \\
+Storage & 2 & 128GB & 33TB & 1GbE+IB \\
+\bottomrule
+\end{tabular}
+}
+\caption{Cluster Node Configurations}
+\label{tab:node_configs}
 \end{table}
 
 According to the power calculator on Inspur's official website, the power consumption of the predecessor NF5280M6 of the NF5280M7 server we used is shown in the table below:
 \begin{table}[H]
 \centering
 \caption{NF5280M6 Power Consumption}
+\vspace{0.5cm}
 \begin{tabular}{|l|l|}
-\hline
+\toprule
 Loads & Power consumption \\
-\hline
+\midrule
 100\% & 695.88W \\
 \hline
 50\% & 433.00W \\
@@ -333,7 +352,7 @@ Loads & Power consumption \\
 25\% & 304.15W \\
 \hline
 0\% & 177.68W \\
-\hline
+\bottomrule
 \end{tabular}
 \end{table}
 
@@ -341,10 +360,11 @@ Therefore, after comparing the differences between the servers, we presume the p
 \begin{table}[H]
 \centering
 \caption{NF5280M7 Power Consumption with Xeon 6538Y+}
+\vspace{0.5cm}
 \begin{tabular}{|l|l|}
-\hline
+\toprule
 Load & Power consumption \\
-\hline
+\midrule
 100\% & 670W \\
 \hline
 50\% & 410W \\
@@ -352,7 +372,7 @@ Load & Power consumption \\
 25\% & 285W \\
 \hline
 0\% & 150W \\
-\hline
+\bottomrule
 \end{tabular}
 \end{table}
 
@@ -364,10 +384,11 @@ All node power consumption in the power consumption data below is assumed from t
 \begin{table}[H]
 \centering
 \caption{Power Consumption in GPU mode}
+\vspace{0.5cm}
 \begin{tabular}{|l|l|}
-\hline
+\toprule
 Component & Power consumption \\
-\hline
+\midrule
 4 Nodes & 2780W \\
 \hline
 InfiniBand Switch & 100W \\
@@ -377,7 +398,7 @@ Ethernet Switch & 20W \\
 GPU(Idle) & 100W \\
 \hline
 Total Power & 3000W \\
-\hline
+\bottomrule
 \end{tabular}
 \end{table}
 
@@ -396,14 +417,15 @@ n GPU mode, the floating-point performance of a single H100 card is 51.22 TFlops
 \begin{table}[H]
 \centering
 \caption{Cluster Performance}
+\vspace{0.5cm}
 \begin{tabular}{|l|l|}
-\hline
+\toprule
 Mode & Performance \\
-\hline
+\midrule
 CPU & 21.2922 TFlops \\
 \hline
 GPU & 256.1 TFlops \\
-\hline
+\bottomrule
 \end{tabular}
 \end{table}
 
@@ -416,24 +438,26 @@ During the formation of the cluster, we used the server power calculation tool p
 \begin{table}[H]
 \centering
 \caption{Hardware Configuration}
+\vspace{0.5cm}
 \begin{tabular}{|l|l|}
-\hline
+\toprule
 Item & Configuration \\
-\hline
+\midrule
 CPU & Intel Xeon Gold 5218R x2 \\
 \hline
 Memory & DDR3 128GB \\
-\hline
+\bottomrule
 \end{tabular}
 \end{table}
 
 \begin{table}[H]
 \centering
 \caption{Software Configuration}
+\vspace{0.5cm}
 \begin{tabular}{|l|l|}
-\hline
+\toprule
 Item & Configuration \\
-\hline
+\midrule
 OS & CentOS 7.9.2009 \\
 \hline
 Compiler & Intel mpiicc 2021.11 \\
@@ -441,7 +465,7 @@ Compiler & Intel mpiicc 2021.11 \\
 Math Library & Intel Math Kernel Library 2024.0 \\
 \hline
 MPI & Intel MPI Library 2021.11 \\
-\hline
+\bottomrule
 \end{tabular}
 \end{table}
 
@@ -639,12 +663,13 @@ Finally, the best parameter settings obtained through the test are as follows:
 \begin{table}[H]
 \centering
 \caption{Parameter settings}
+\vspace{0.5cm}
 \begin{tabular}{|l|l|l|l|}
-\hline
+\toprule
 N & NB & P & Q \\
-\hline
+\midrule
 120000 & 288 & 5 & 8 \\
-\hline
+\bottomrule
 \end{tabular}
 \end{table}
 
