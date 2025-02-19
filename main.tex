@@ -50,11 +50,11 @@
     {\LARGE Proposal For ASC 25}\\[0.5cm]
     \large Team Name: YSU Super Fighters\\[1cm] % 使用占位符
     \begin{tabular}{c}
-        \large Jin Chenye \\
         \large Li Wangyang \\
+        \large Jin Chenye \\
         \large Cui Shuyang \\
-        \large Li Jinze \\
-        \large Fang Yi
+        \large Zhang Guangqi \\
+        \large Liu Guanyu
     \end{tabular}
 }
 \author{}
@@ -84,7 +84,7 @@ The supercomputing center adopts a mature and general system architecture, which
 \begin{table}[H]
 \centering
 \caption{The main configurations}
-\begin{tabular}{|l|l|l|l|}
+\begin{tabular}{|l|l|l|p{6cm}|}
 \hline
 Type & Number(Desk) & Name & Description \\
 \hline
@@ -92,16 +92,11 @@ Management & 1 & mgt1 &  \\
 \hline
 Login node & 1 & login &  \\
 \hline
-Compute node & 30 & node1-node30 & 2 Intel E5-2683v3 processors ( 28 Cores 2.0Ghz) \\
- &  &  & 64GB DDR4 ECC REG memory \\
- &  &  & Infiniband QDR 40Gb/s high-speed network \\
+Compute node & 30 & node1-node30 & 2 Intel E5-2683v3 processors (28 Cores 2.0Ghz), 64GB DDR4 ECC REG memory, Infiniband QDR 40Gb/s high-speed network \\
 \hline
-GPU Visual Node & 2 & GPU1,GPU2 & 2 Intel E5-2683v3 Processors ( 28 Cores 2.0Ghz) \\
- &  &  & 128GB DDR4 ECC REG memory \\
- &  &  & Infiniband QDR 40Gb/s high-speed network \\
- &  &  & NVIDIA TitanX GPU \\
+GPU Visual Node & 2 & GPU1,GPU2 & 2 Intel E5-2683v3 Processors (28 Cores 2.0Ghz), 128GB DDR4 ECC REG memory, Infiniband QDR 40Gb/s high-speed network, NVIDIA TitanX GPU \\
 \hline
-IO node & 2 & gpfs1,nfs & Gpfs1 capacity available 18TB available 15TB,nfs capacity \\
+IO node & 2 & gpfs1,nfs & Gpfs1 capacity available 18TB available 15TB, nfs capacity \\
 \hline
 \end{tabular}
 \end{table}
@@ -111,39 +106,39 @@ The Supercomputing center supports the running of computing software such as Ans
 \begin{table}[H]
 \centering
 \caption{Software resources}
-\begin{tabular}{|l|l|l|}
+\begin{tabular}{|l|p{8cm}|}
 \hline
-number & Software Name & Description \\
+Software Name & Description \\
 \hline
-1 & Centos7.2 & Operating System Platform \\
+Centos7.2 & Operating System Platform \\
 \hline
-2 & NFSv4 & Web file system \\
+NFSv4 & Web file system \\
 \hline
-3 & MPICH/MPICH2/OpenMPI & Open source parallel development environment \\
+MPICH/MPICH2/OpenMPI & Open source parallel development environment \\
 \hline
-4 & Paramon Paratune & Application of running feature collector Application of running feature analyzer \\
+Paramon Paratune & Application of running feature collector Application of running feature analyzer \\
 \hline
-5 & Intel Parallel Studio XE 2015 & Intel Parallel Development Suite \\
+Intel Parallel Studio XE 2015 & Intel Parallel Development Suite \\
 \hline
-6 & Intel MKL 2017 & Intel Library of Mathematical Functions \\
+Intel MKL 2017 & Intel Library of Mathematical Functions \\
 \hline
-7 & Intel MPI 2017 & Intel Parallel Messaging Library \\
+Intel MPI 2017 & Intel Parallel Messaging Library \\
 \hline
-8 & IBM Platform Computing LSF & Resource Management and Operational Movement Control System \\
+IBM Platform Computing LSF & Resource Management and Operational Movement Control System \\
 \hline
-9 & IBM GPFS & Common Parallel Document System \\
+IBM GPFS & Common Parallel Document System \\
 \hline
-10 & Openmpi 2.0.2 & Open source Intel Parallel Messaging Library \\
+Openmpi 2.0.2 & Open source Intel Parallel Messaging Library \\
 \hline
-11 & FFTW & Fuliye \\
+FFTW & Fuliye \\
 \hline
-12 & gromacs-5.1.4 & Molecular dynamics program \\
+gromacs-5.1.4 & Molecular dynamics program \\
 \hline
 \end{tabular}
 \end{table}
 
 
-\subsection{Supercomputing-related Courses, Trainings, and Interest Groups}
+\subsection{Supercomputing Courses and Groups}
 Our school has an organization of supercomputers, including parallel computing group, algorithm design and optimization group, Linux cluster construction group and test group. In the parallel computing group, the leading teachers teach relevant knowledge, and students learn parallel programming, C language, MPI, cluster management and other parallel computing knowledge independently. In addition, our school has set up a discussion group for students who like supercomputers. We learn from each other in the discussion group. Students who have experience in ASC or other super computing competitions actively share their experience. When they encounter problems that cannot be solved, they will discuss and seek solutions in the group
 
 \subsection{Supercomputing-related Research and Applications}
