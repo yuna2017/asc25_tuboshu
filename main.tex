@@ -795,12 +795,12 @@ Through code analysis and observation of program execution results, we found tha
 
 Defined \texttt{create\_model\_runner} function to configure jax environment, including disabling 64-bit operations and setting thread count. Implemented \texttt{\_post\_process\_result} function for optimizing result processing and data type conversion. Created \texttt{ModelRunner} class with \texttt{\_split\_batch}, \texttt{run\_inference}, and \texttt{\_merge\_results} functions for dynamic batch processing, parallel model inference, and parallel result merging. Implemented \texttt{NumericsHandler} class with \texttt{handle\_coordinate\_numerics}, \texttt{handle\_general\_numerics}, and \texttt{check\_output\_numerics} functions for detecting and handling NaN/Inf values. Developed \texttt{CacheManager} class with \texttt{\_get\_cache\_key}, \texttt{\_serialize\_value}, \texttt{\_deserialize\_value}, and \texttt{put} functions for cache management. Created \texttt{MemoryManager} class with \texttt{get\_memory\_usage}, \texttt{update}, \texttt{cleanup}, and \texttt{monitor} functions for memory management.
 
-\begin{figure}[htbp]
-    \centering
-    \includegraphics[width=0.8\textwidth, bb=0 0 800 600]{alphafold3-workflow.svg}
-    \caption{Optimized Method Workflow Diagram}
-    \label{fig:optim_flow_v2}
-\end{figure}
+% \begin{figure}[htbp]
+%     \centering
+%     \includegraphics[width=0.8\textwidth, bb=0 0 800 600]{alphafold3-workflow.svg}
+%     \caption{Optimized Method Workflow Diagram}
+%     \label{fig:optim_flow_v2}
+% \end{figure}
 
 
 \subsubsection{Optimization Results}
