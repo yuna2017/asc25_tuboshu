@@ -221,7 +221,7 @@ YSUers save the world.
 
 \newpage
 
-\section{Technical Proposal Requirements}
+\section{Technical Proposal}
 
 \subsection{Design of HPC System}
 
@@ -918,7 +918,6 @@ Version-controlled execution environments ensure consistency, with Conda managin
 \subsection{Theoretical Optimization Potential}
 Because of the lacking of time, we have not yet implemented the following optimization strategies but obtained the theoretical speedup projection based on the optimization strategies.
 
-\subsection{Resource-aware Pipeline Scheduling}
 Despite achieving 89.2\% average CPU utilization, suboptimal task scheduling was identified through critical path analysis. Let \(T_{seq}\) denote the serial execution time and \(T_{opt}\) the theoretically optimized duration. For \(n\) independent subtasks \(\tau_1,\tau_2,...,\tau_n\) with execution times \(t_i\), the achievable speedup follows:
 
 \begin{equation}
@@ -927,7 +926,7 @@ S = \frac{T_{seq}}{T_{opt}} = \frac{\sum_{i=1}^n t_i}{\max\left(\sum_{j\in C_1} 
 
 Where \(C_1\) and \(C_2\) represent computational resources (e.g., CPU clusters). Our pipeline contains three optimizable patterns:
 
-\subsubsection{Java Task Offloading}
+\subsubsection{Resource-aware Pipeline Task Offloading}
 UMICollapse deduplication (Java heap-limited) exhibited 0.83 IPC vs. 2.1 for HISAT-3N. Migrating to high-clock nodes (3.8GHz vs current 2.4GHz) could yield:
 
 \begin{equation}
@@ -948,7 +947,7 @@ Theoretical overlap gain:
 \Delta T_{overlap} = \sum_{i=1}^n \min(t_{cpu\_idle}, t_{task_i}) = 112s\ (per\ sample)
 \end{equation}
 
-\subsection{Heterogeneous Computing Framework}
+\subsubsection{Heterogeneous Computing Framework}
 We propose a dynamic DAG scheduler implementing the following logic:
 
 \begin{algorithm}[H]
