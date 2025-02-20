@@ -535,7 +535,7 @@ So for Ax is equal to b, can convert Ax is equal to b into an upper trigonometri
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.7\textwidth]{LU_factorization.png}
+    \includegraphics[width=0.3\textwidth]{LU_factorization.png}
     \caption{LU factorization}
     \label{fig:lu_factorization}
 \end{figure}
@@ -691,7 +691,7 @@ The actual double precision floating-point calculation peak obtained from the ab
 Performance-Ratio = 1082.5Gflops/1344Gflops = 80.54\%
 \end{equation*}
 
-\textbf{2.2.6Document introduction}
+\textbf{2.2.6 Performance Results}
 \begin{itemize}
     \item (1)hpl\_N\_NB.out and hpl\_N\_NB\_2.out: The output with different Ns and NBs. We choose N and NB according it.
     \item (2)hpl\_N\_PQ.out: The output with different pairs of P and Q. We choose P and Q according it.
@@ -717,22 +717,22 @@ In a large-scale parallel environment, HPCG uses a three-dimensional area decomp
     \label{fig:symgs_restriction}
 \end{figure}
 
-\textbf{2.3.3Build HPCG}
+\textbf{2.3.3 Build HPCG}
 
 We used both intel oneAPI Tools and GCC to compile it. After test, we found that the hpcg program with intel compiler performed better on our intel Xeon processors. So we chose the ICPC\_OMP arch.
 
-\textbf{2.3.4Parameter Settings}
+\textbf{2.3.4 Parameter Settings}
 
-\textbf{2.3.4.1Testing Time}
+\textbf{2.3.4.1 Testing Time}
 
 HPCG can be run in just a few minutes from start to finish. However, official runs must be at least 1800 seconds (30 minutes) as reported in the output file. To achieve a balance between validity and efficiency, and make sure that the valid run time is more than 1800 seconds, we took 3600s as the run time of HPCG, which is able to get a valid result with acceptable time consumption.
 
-\textbf{2.3.4.2Problem Size}
+\textbf{2.3.4.2 Problem Size}
 
 A valid run must also execute a problem size that is large enough so that data arrays accessed in the CG iteration loop do not fit in the cache of the device in a way that 21 would be unrealistic in a real application setting. Presently this restriction means that the problem size should be large enough to occupy a significant fraction of “main memory”, at least 1/4 of the total. Based on this rule, We choose several problem sizes, trying to make out which can lead to best performance.
 The parameter local domain dimension specified by user in hpcg.dat predicts the problem size. The default local domain dimension is 192 × 192 × 192. Higher performance is observed when small problem size is specified. However, values under 32 will be defaulted to 32(for a 32x32×32 mesh). Therefore, we choose 32 as the local domain dimension.
 
-\textbf{2.3.5Performance Estimation}
+\textbf{2.3.5 Performance Estimation}
 
 Performance ratio of HPL test value and theoretical peak value:
 
@@ -746,7 +746,7 @@ Performance ratio of HPL test value and HPCG test value:
 Performance-Ratio = 1082.5Gflops/10.8092Gflops = 0.998\%
 \end{equation*}
 
-\textbf{2.3.6Document introduction}
+\textbf{2.3.6 Performance Results}
 \begin{itemize}
     \item (1)HPCG-Benchmark.txt: the final output of HPCG test.
 \end{itemize}
