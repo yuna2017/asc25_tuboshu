@@ -160,23 +160,23 @@ b) A team of our school successfully won the bronze prize of parallel optimizati
 
 \subsection{Team Setup}
 
-The five members of our team consist of one freshman and four juniors, and all five of us are from the same supercomputer group on campus. Before the ASC2025 competition was announced, our team members frequently engaged in in-depth discussions on parallel programming, C language, MPI, distributed system management, and other parallel computing knowledge. We learn and discuss together, which is the core factor that binds us as a team. To better participate in and advance the ASC2025 competition, the team invited senior students who have previously participated in such competitions to provide analysis and guidance, thereby formally establishing our team. The five of us perform our respective roles, each with our own strengths, and we understand and cooperate with each other, enabling us to tackle any challenges.
+Our five-member team from the university's HPC research group combines fresh perspectives (one freshman) with advanced technical maturity (four juniors). Prior to ASC2025, we honed our expertise through collaborative study in parallel programming, C, MPI, and distributed systems. Guided by experienced ASC alumni, we solidified our multidisciplinary team where each member contributes specialized skills in system optimization and algorithm design. Our complementary strengths in HPC architecture and performance tuning enable effective problem-solving through close collaboration.
 
 \subsection{Team Members}
 \begin{table}[H]
 \centering
 \begin{center}
+    \begin{minipage}{0.45\textwidth}
+        \centering
+        \includegraphics[width=0.5\textwidth]{Li_Wangyang.png}\\[0.3cm]
+        \textbf{Li Wangyang}\\[0.3cm]
+        \small{Experienced in high-performance computing and parallel programming.}
+    \end{minipage}
 \begin{minipage}{0.45\textwidth}
     \centering
     \includegraphics[width=0.5\textwidth]{Jin_Chenye.png}\\[0.3cm]
     \textbf{Jin Chenye}\\[0.3cm]
-    \small{Skilled in algorithms and AI, with expertise in GPU cluster operations.}
-\end{minipage}
-\begin{minipage}{0.45\textwidth}
-    \centering
-    \includegraphics[width=0.5\textwidth]{Li_Wangyang.png}\\[0.3cm]
-    \textbf{Li Wangyang}\\[0.3cm]
-    \small{Experienced in high-performance computing and parallel programming.}
+    \small{Skilled in algorithms and expertise in GPU cluster operations.}
 \end{minipage}
 
 \vspace{1cm}
@@ -252,7 +252,7 @@ The software configuration is shown below:
 		Item & Configuration \\
 		\midrule
 		Operating System & CentOS 7.9 \\
-		Compiler & gcc4.9.2 \\
+		Compiler & gcc 4.9.2 \\
 		MPI Software & Open MPI 1.10.2 \\
 		Math Library & Intel MKL 2020 \\
 		High-performance Application Layer & CUDA 12.0 \\
@@ -899,11 +899,7 @@ Critical path analysis revealed resource utilization patterns:
 \begin{itemize}
     \item \textbf{CPU-bound operations}: HISAT-3N alignment utilized 5284\% CPU (56 threads × 94.3\% utilization)
     \item \textbf{I/O-bound phases}: samtools fastq sustained 234\% system CPU during BAM conversion
-    \item \textbf{Memory constraints}: UMICollapse maintained 40GB heap boundary during deduplication
 \end{itemize}
-
-\subsection{Quality Control Metrics}
-The pipeline implements three-tier filtering: (1) Primary alignment filtering (F3980 flag) removed 17.3\% of genome-mapped reads; (2) UMI deduplication eliminated 22.4\% PCR duplicates; (3) Final binomial testing applied thresholds of d ≥20, u ≥3, and p <0.001. Background estimation from non-candidate positions showed global unconverted ratio of 0.0187±0.0023 (mean±SD).
 
 \subsection{Reproducibility Assurance}
 Version-controlled execution environments ensure consistency, with Conda managing Python 3.12.0 and Polars 1.19.0 dependencies. Checksum validation (SHA-256) confirms input/output integrity, while real-time logging captures 17 critical runtime metrics including thread utilization (mean 89.2\%±11.4\%) and memory pressure (max RSS 58.3GB). The compressed submission package adheres to ASC25 specifications, containing:
@@ -965,35 +961,6 @@ We propose a dynamic DAG scheduler implementing the following logic:
 \EndWhile
 \end{algorithmic}
 \end{algorithm}
-
-\newpage
-
-\section{Additional Materials}
-% 在这里添加关于HPL输出文件、HPCG输出文件、AlphaFold3推理挑战所需文件和RNA m5C挑战所需文件的内容
-
-\newpage
-
-\appendix
-\section{Additional Technical Details}
-\subsection{Configuration Files}
-Example of including configuration files:
-
-\begin{lstlisting}[language=bash, caption=HPL Configuration File]
-# Sample HPL.dat
-HPL.out      output file name
-6            device out (6=stdout,7=stderr,file)
-1            # of problems sizes (N)
-29000        Ns
-1            # of NBs
-256          NBs
-0            PMAP process mapping (0=Row-,1=Column-major)
-1            # of process grids (P x Q)
-2            Ps
-2            Qs
-16.0         threshold
-1            # of panel fact
-2            PFACTs (0=left, 1=Crout, 2=Right)
-\end{lstlisting}
 
 \newpage
 
