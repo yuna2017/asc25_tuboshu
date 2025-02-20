@@ -760,7 +760,7 @@ pip install --upgrade "jax[cuda12]"
 \end{lstlisting}
 
 After installation, the jax version is 0.5.0, which differs from the version required in the dockerfile but still runs normally.
-
+We attempted to deploy the model on two Tesla P100 16GB GPUs. However, when the input files were too large, the memory capacity of a single GPU was insufficient to support the model's operation. After trying dynamic memory allocation, we found that JAX's initialization and input file caching were inseparable, and the GPU memory usage exceeded the 16GB limit of a single Tesla P100. As a result, we chose to perform model inference on two NVIDIA GeForce 3090 24GB GPUs.
 \subsubsection{Hardware Configuration}
 Using the compute01 node of the supercomputing cluster, which is configured with: CPU: Intel Xeon Gold 5218R @ 2.10GHz, GPU: 2* NVIDIA GeForce 3090 24G, RAM: 125G.
 
