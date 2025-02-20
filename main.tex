@@ -482,18 +482,15 @@ MPI & Intel MPI Library 2021.11 \\
 \caption{Software Configuration}
 \end{table}
 
+\subsection{HPL}
 
-\subsubsection{Performance Optimization and Testing Methods}
-
-\textbf{2.2 HPL}
-
-\textbf{2.2.1 Background}
+\subsubsection{Background}
 
 HPL is a software package that solves a (random) dense linear system using double precision (64 bits) arithmetic on distributed-memory computers. It is a portable and free implementation of the High Performance Computing Linpack Benchmark.
 
 The HPL package includes a testing and timing program that measures the accuracy and speed of the solution. The performance of this software on your system depends on many factors. However, with some assumptions on the interconnection network, the algorithm and its implementation described here are scalable, meaning that their parallel efficiency remains constant with the per processor memory usage.
 
-\textbf{2.2.2 Test Principle}
+\subsubsection{Test Principle}
 
 When the matrix size is N, the total number of floating point operations is:
 \begin{equation}
@@ -505,11 +502,11 @@ Therefore, given the problem size N and measured execution time T, the system pe
     \text{Performance} = \frac{N_{flop}}{T} = \frac{\frac{2N^3}{3} + 2N^2}{T} \quad \text{FLOPS}
 \end{equation}
 
-\textbf{2.2.3 HPL Algorithm Analysis}
+\subsubsection{HPL Algorithm Analysis}
 
 The algorithm used by HPL can be summarized by the following keywords: Two-dimensional block-cyclic data distribution - Right-looking variant of the LU factorization with row partial pivoting featuring multiple look-ahead depths Recursive panel factorization with pivot search and column broadcast combined - Various virtual panel broadcast topologies bandwidth reducing swap-broadcast algorithm backward substitution with look-ahead of depth.
 
-\textbf{(1) LU decomposition}
+\paragraph{LU decomposition}
 
 Firstly, HPL compute the LU factorization of matrix A
 \begin{equation*}
@@ -549,7 +546,7 @@ So for Ax is equal to b, can convert Ax is equal to b into an upper trigonometri
 
 First complete the decomposition of $A_{11}$, then complete the decomposition of $A_{12}$and $A_{22}$, finally update$A_{22}$. According to such a calculation sequence, the two-dimensional block-cyclic data distribution strategy needs to be adopted to divide the data of the matrix to each process in parallel LU decomposition.
 
-\textbf{(2)Block Cyclic Data Distribution}
+\paragraph{Block Cyclic Data Distribution}
 
 The Block Cyclic Data Distribution strategy is step-wise to a 2D GRID of P X Q processes to ensure load balancing and scalability of the algorithm. NB is the width of the panel. And the data in the process are stored continuously. Interprocess data distribution is shown in the figure below:
 
@@ -562,7 +559,7 @@ The Block Cyclic Data Distribution strategy is step-wise to a 2D GRID of P X Q p
 
 The way the matrix is distributed on the process has a great influence on the load balancing and communication characteristics of the concurrent algorithm and therefore determines its performance and scalability to a large extent. Circular block distribution provides a simple and general method for distributing block partitioning matrices on distributed memory concurrent computers. The block cycle data distribution is determined by four parameters P,q, and m,n, where P,q is the process grid M and N determines the block size. Blocks separated by fixed strides in column and row directions are assigned to the same processes.
 
-\textbf{(3).Panel broadcast}
+\paragraph{Panel broadcast}
 
 For process grid with multiple columns, every cycle is calculated only a list of the panel process execution decomposition, decomposition of the panel process to perform a panel of each column line communication exchange algorithm and choose the maximum principal yuan, panel decomposition calculation, after the completion of the decomposed data broadcast to other processes, swapping operation lines (exchange and radio), Each process saves a copy of the current U matrix and updates the trailing matrix with the latest Panel and U. The calculation process is shown in the figure below:
 
@@ -573,7 +570,7 @@ For process grid with multiple columns, every cycle is calculated only a list of
     \label{fig:panel_broadcast}
 \end{figure}
 
-\textbf{(4).Panel decomposition}
+\paragraph{Panel decomposition}
 
 Panel decomposition is completed by a row of processes that currently have this Panel block. Each time, the largest principal element is selected, an element in the first line of the Panel is exchanged, and the row where the largest principal element is broadcast to each process, and the first number is solved by each process.
 
@@ -583,9 +580,9 @@ HPL adopts the row principal element algorithm. Before the single-step matrix up
 
 In the panel decomposition stage, subscripts and the process where the data to be exchanged have been calculated and sent to each process along with panel broadcast.
 
-\textbf{2.2.4Parameter Settings}
+\subsubsection{Parameter Settings}
 
-\textbf{2.2.4.1Size of Matrix}
+\paragraph{Size of Matrix}
 
 N represents the number and scale of matrices to be solved.The larger the matrix size n is,the greater the proportion of effective calculation, The higher the floating-point processing performance of the system.
 
@@ -603,7 +600,7 @@ N \times N \times 8bytes = memory \times 80\%
 
 Therefore, when the value of n is 113137, the effective calculation accounts for a high proportion.
 
-\textbf{2.2.4.2 Size of Block Matrix}
+\paragraph{Size of Block Matrix}
 
 NB is the size of the matrix block. In the process of solving the matrix, the size of the matrix block has a great impact on the performance. The choice of NB is closely related to many factors of software and hardware. The selection of Nb value generally follows the following rules:
 \begin{itemize}
@@ -624,7 +621,7 @@ According to the above rulestest we tried several NBs, the results are shown in 
 
 It can be seen that when NB is around 264 or 344, the performance is better in our machine when N is bigger than 50000. As for 113137, we will try more NBs later.
 
-\textbf{2.2.4.3Parameters of P and Q}
+\paragraph{Parameters of P and Q}
 
 PxQ represents a two-dimensional processor grid where p represents the number of processors in the horizontal direction, Q indicates the number of processors in the vertical direction. Generally, one process corresponds to one CPU, with better performance. There is the following formula:
 \begin{equation*}
@@ -642,7 +639,7 @@ We have 40 processors in total, so we tried several pairs of P and Q and make su
 
 It is found that the performance is better when P is 4 and Q is 10. P=5 and Q=8 is also a good choice.
 
-\textbf{2.2.5 HPL Performance Evaluation}
+\subsubsection{HPL Performance Evaluation}
 
 The theoretical peak double precision floating-point performance can be calculated as:
 \begin{equation}
@@ -691,22 +688,22 @@ The actual double precision floating-point calculation peak obtained from the ab
 Performance-Ratio = 1082.5Gflops/1344Gflops = 80.54\%
 \end{equation*}
 
-\textbf{2.2.6 Performance Results}
+\subsubsection{Performance Results}
 \begin{itemize}
     \item (1)hpl\_N\_NB.out and hpl\_N\_NB\_2.out: The output with different Ns and NBs. We choose N and NB according it.
     \item (2)hpl\_N\_PQ.out: The output with different pairs of P and Q. We choose P and Q according it.
     \item (3)hpl.out: The final test output, which including the peek performance we got.
 \end{itemize}
 
-\textbf{2.3 HPCG}
+\subsection{HPCG}
 
-\textbf{2.3.1 Background}
+\subsubsection{Background}
 
 The High Performance Conjugate Gradients (HPCG) Benchmark project is an effort to create a new metric for ranking HPC systems. HPCG is intended as a complement to the High Performance LINPACK (HPL) benchmark, currently used to rank the TOP500 computing systems. The computational and data access patterns of HPL are still representative of some important scalable applications, but not all. HPCG is designed to exercise computational and data access patterns that more closely match a different and broad set of important applications, and to give incentive to computer system designers to invest in capabilities that will have impact on the collective performance of these applications.
 
 Compared with the HPL benchmark test, its calculation, memory access and communication modes are more representative of a wide range of scientific and engineering computing applications, which based on partial differential equation solving. Also, it helps to reflect the system's memory access bandwidth, latency and communication energy more comprehensively, to make up for the deficiencies and drawbacks of the hpl test. But the test results are usually lower than the HPL test results, often only have a few percent.
 
-\textbf{2.3.2 Test Principle}
+\subsubsection{Test Principle}
 
 In a large-scale parallel environment, HPCG uses a three-dimensional area decomposition strategy, which is to divide the entire computing area into sub-areas according to 3 dimensions,and then each sub-areas is assigned an MPI process. The HPCG program includes dot product (DDOT), vector update function (Waxpby), large sparse matrix multiplication (SYMV) and triple solver (SYMGS) and Multi-Grid algorithm (MG).
 
@@ -717,22 +714,22 @@ In a large-scale parallel environment, HPCG uses a three-dimensional area decomp
     \label{fig:symgs_restriction}
 \end{figure}
 
-\textbf{2.3.3 Build HPCG}
+\subsubsection{Build HPCG}
 
 We used both intel oneAPI Tools and GCC to compile it. After test, we found that the hpcg program with intel compiler performed better on our intel Xeon processors. So we chose the ICPC\_OMP arch.
 
-\textbf{2.3.4 Parameter Settings}
+\subsubsection{Parameter Settings}
 
-\textbf{2.3.4.1 Testing Time}
+\paragraph{Testing Time}
 
 HPCG can be run in just a few minutes from start to finish. However, official runs must be at least 1800 seconds (30 minutes) as reported in the output file. To achieve a balance between validity and efficiency, and make sure that the valid run time is more than 1800 seconds, we took 3600s as the run time of HPCG, which is able to get a valid result with acceptable time consumption.
 
-\textbf{2.3.4.2 Problem Size}
+\paragraph{Problem Size}
 
 A valid run must also execute a problem size that is large enough so that data arrays accessed in the CG iteration loop do not fit in the cache of the device in a way that 21 would be unrealistic in a real application setting. Presently this restriction means that the problem size should be large enough to occupy a significant fraction of “main memory”, at least 1/4 of the total. Based on this rule, We choose several problem sizes, trying to make out which can lead to best performance.
 The parameter local domain dimension specified by user in hpcg.dat predicts the problem size. The default local domain dimension is 192 × 192 × 192. Higher performance is observed when small problem size is specified. However, values under 32 will be defaulted to 32(for a 32x32×32 mesh). Therefore, we choose 32 as the local domain dimension.
 
-\textbf{2.3.5 Performance Estimation}
+\subsubsection{Performance Estimation}
 
 Performance ratio of HPL test value and theoretical peak value:
 
@@ -746,11 +743,10 @@ Performance ratio of HPL test value and HPCG test value:
 Performance-Ratio = 1082.5Gflops/10.8092Gflops = 0.998\%
 \end{equation*}
 
-\textbf{2.3.6 Performance Results}
+\subsubsection{Performance Results}
 \begin{itemize}
     \item (1)HPCG-Benchmark.txt: the final output of HPCG test.
 \end{itemize}
-
 
 \subsection{Optimization for AlphaFold3 Inference}
 
