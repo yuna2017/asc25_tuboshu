@@ -150,14 +150,13 @@ a) In the 2022 World University Supercomputer Competition (ASC19), the teams of 
 
 b) A team of our school successfully won the bronze prize of parallel optimization in the 8th "Intel Cup" Parallel Application Challenge pac2020. Here are the winners Certificate (Figure 1.4.2):
 
-
 \newpage
 
 \section{Team Introduction}
 
 \subsection{Team Setup}
 
-The five members of our team consisted of one senior and four sophomores, and all five of us were from the same supercomputer group on campus. Before ASC2024 was released, members of our team often discussed parallel programming, C language, MPI, distributed system management and other parallel computing knowledge. We learn and discuss together, which is the core factor that makes us a team. Since the four sophomore members are participating for the first time, in order to better participate in and conduct the ASC2024 competition, the team invited senior students who have participated in the competition to analyze and guide, so our team was established.The five of us perform our respective roles, each has its own strengths, and understand each other, cooperate with each other, can challenge any difficulties.
+The five members of our team consist of one freshman and four juniors, and all five of us are from the same supercomputer group on campus. Before the ASC2025 competition was announced, our team members frequently engaged in in-depth discussions on parallel programming, C language, MPI, distributed system management, and other parallel computing knowledge. We learn and discuss together, which is the core factor that binds us as a team. To better participate in and advance the ASC2025 competition, the team invited senior students who have previously participated in such competitions to provide analysis and guidance, thereby formally establishing our team. The five of us perform our respective roles, each with our own strengths, and we understand and cooperate with each other, enabling us to tackle any challenges.
 
 \subsection{Team Members}
 \begin{table}[H]
@@ -187,7 +186,7 @@ The five members of our team consisted of one senior and four sophomores, and al
 \begin{minipage}{0.45\textwidth}
     \centering
     \includegraphics[width=0.5\textwidth]{Li_Jinze.png}\\[0.3cm]
-    \textbf{Li Jinze}\\[0.3cm]
+    \textbf{Liu Guanyu}\\[0.3cm]
     \small{Expertise in HPC testing, parallel computing, and machine learning.}
 \end{minipage}
 
@@ -196,7 +195,7 @@ The five members of our team consisted of one senior and four sophomores, and al
 \begin{minipage}{0.45\textwidth}
     \centering
     \includegraphics[width=0.5\textwidth]{Fang_Yi.png}\\[0.3cm]
-    \textbf{Fang Yi}\\[0.3cm]
+    \textbf{Zhang Guangqi}\\[0.3cm]
     \small{Skilled in algorithms and parallel computing.}
 \end{minipage}
 \end{center}
@@ -224,7 +223,7 @@ YSUers save the world.
 
 \subsubsection{Theoretical Design of an HPC Cluster}
 
-To archive the goal of best computing performance within the limitation of 3KW power consumption, we designed 2 types of nodes in our cluster: CPU node and GPU node.
+To archive the goal of best computing performance within the limitation of 4KW power consumption, we designed 2 types of nodes in our cluster: CPU node and GPU node.
 
 CPU node: each node contains 2 CPU.
 
@@ -232,13 +231,32 @@ GPU node: each node contains 2 CPU and some GPU.
 
 Not all of those components are active during use, some of them will keep idle.
 
-We designed a HPC system with a total of 4 nodes. Our estimated total system power consumption is less than 3KW when the system is running in both modes described below.
+We designed a HPC system with a total of 4 nodes. Our estimated total system power consumption is less than 4KW when the system is running in both modes described below.
 
 CPU mode: in this mode, the CPUs of all nodes work while the GPUs of the GPU nodes will remain idle. This computing mode is suitable for high-performance applications that run only on CPUs.
 
 GPU mode: In this mode, CPU nodes are idle and GPU nodes work. This computing mode is suitable for applications that require computation on GPU.
 
 \subsubsection{Software and Hardware Configurations}
+The software configuration is shown below:
+\begin{table}[H]
+	\centering
+	\caption{Software Configuration}
+	\vspace{0.5cm}
+	\begin{tabular}{ll}
+		\toprule
+		Item & Configuration \\
+		\midrule
+		Operating System & CentOS 7.9 \\
+		Compiler & gcc4.9.2 \\
+		MPI Software & Open MPI 1.10.2 \\
+		Math Library & Intel MKL 2020 \\
+		High-performance Application Layer & CUDA 12.0 \\
+		High-performance Application Layer & Tensorflow 1.15.5 \\
+		High-performance Application Layer & Pytorch 1.10.0 \\
+		\bottomrule
+	\end{tabular}
+\end{table}
 
 The general single CPU node configuration is shown below:
 \begin{table}[H]
@@ -249,8 +267,8 @@ The general single CPU node configuration is shown below:
 \toprule
 Component Name & Model & Count \\
 \midrule
-Server & Inspur NF5280M7 & 1 \\
-CPU & Intel Xeon 6530 & 2 \\
+Server & Dual Processor Server & 1 \\
+CPU & AMD EPYC™ 7642P & 2 \\
 Memory & DDR5 32G & 16 \\
 HardDrive & SSD 480G & 1 \\
 HCA & InfiniBand Mellanox ConnectX®-7 HDR & 1 \\
@@ -258,15 +276,15 @@ HCA & InfiniBand Mellanox ConnectX®-7 HDR & 1 \\
 \end{tabular}
 \end{table}
 
-The configuration of CPU node 1 is the same as the single node configuration described above.GPU node 1 adds 1 NVIDIA H100 80G PCIe GPU on top of the CPU node 1 configuration, and GPU nodes 2,3 add 4 NVIDIA H100 80G PCIe GPUs on top of the single node configuration and replace the CPUs with Xeon 6538Y+.
+The configuration of CPU node 1 is the same as the single node configuration described above.GPU node 1 adds 1 NVIDIA A100 80G PCIe GPU on top of the CPU node 1 configuration, and GPU nodes 2,3 add 4 NVIDIA A100 80G PCIe GPUs on top of the single node configuration.
 
 \textbf{Node1 (CPU Node)}: General Node Configuration
 
-\textbf{Node2 (Master GPU Node)}: General Node Configuration + 1 * H100 GPU
+\textbf{Node2 (GPU Node1)}: General Node Configuration + 1 * A100 GPU
 
-\textbf{Node3 (GPU Node)}: General Node Configuration + 2 * H100 GPU + 2 * Xeon 6538Y+
+\textbf{Node3 (GPU Node2)}: General Node Configuration + 2 * A100 GPU
 
-\textbf{Node4 (GPU Node)}: General Node Configuration + 2 * H100 GPU + 2 * Xeon 6538Y+
+\textbf{Node4 (GPU Node2)}: General Node Configuration + 2 * A100 GPU 
 
 \subsubsection{Interconnection, Power Consumption, Performance Evaluation, and Architecture Analysis}
 
@@ -307,9 +325,9 @@ GPU Node 2 & 22kg & 2U & 720mm & 430mm & Liquid \\
 \toprule
 Component & Peak & Idle & Avg & Cost & Notes \\
 \midrule
-CPU Node 1 & 670W & 150W & 410W & \$12K & Base \\
-GPU Node 1 & 850W & 180W & 515W & \$25K & +1 H100 \\
-GPU Node 2 & 1200W & 220W & 710W & \$45K & +2 H100 \\
+CPU Node 1 & 470W & 150W & 310W & \$18K & Base \\
+GPU Node 1 & 870W & 180W & 525W & \$30K & +1 A100 \\
+GPU Node 2 & 1270W & 220W & 745W & \$45K & +2 A100 \\
 \bottomrule
 \end{tabular}
 \caption{Power and Cost Specifications of Cluster Nodes}
@@ -333,24 +351,7 @@ Storage & 2 & 128GB & 33TB & 1GbE+IB \\
 \label{tab:node_configs}
 \end{table}
 
-According to the power calculator on Inspur's official website, the power consumption of the predecessor NF5280M6 of the NF5280M7 server we used is shown in the table below:
-\begin{table}[H]
-\centering
-\vspace{0.5cm}
-\begin{tabular}{cc}
-\toprule
-Loads & Power consumption \\
-\midrule
-100\% & 695.88W \\
-50\% & 433.00W \\
-25\% & 304.15W \\
-0\% & 177.68W \\
-\bottomrule
-\end{tabular}
-\caption{NF5280M6 Power Consumption}
-\end{table}
-
-Therefore, after comparing the differences between the servers, we presume the power consumption of the CPU 1 node and the GPU 1 node (without the GPU) to be
+we presume the power consumption of the CPU 1 node(the GPU 1 node without the GPU)
 \begin{table}[H]
 \centering
 \vspace{0.5cm}
@@ -358,13 +359,13 @@ Therefore, after comparing the differences between the servers, we presume the p
 \toprule
 Load & Power consumption \\
 \midrule
-100\% & 670W \\
-50\% & 410W \\
-25\% & 285W \\
+100\% & 470W \\
+50\% & 330W \\
+25\% & 230W \\
 0\% & 150W \\
 \bottomrule
 \end{tabular}
-\caption{NF5280M7 Power Consumption with Xeon 6538Y+}
+\caption {Dual Processor Server with AMD EPYC 7642}
 \end{table}
 
 All node power consumption in the power consumption data below is assumed from the table above.
@@ -376,10 +377,10 @@ All node power consumption in the power consumption data below is assumed from t
 \toprule
 Component & Power consumption \\
 \midrule
-4 Nodes & 2680W \\
+4 Nodes & 1880W \\
 InfiniBand Switch & 100W \\
 Ethernet Switch & 20W \\
-Total Power & 2800W \\
+Total Power & 2000W \\
 \bottomrule
 \end{tabular}
 \caption{Power Consumption in CPU mode}
@@ -392,39 +393,39 @@ Total Power & 2800W \\
 \toprule
 Component & Power consumption \\
 \midrule
-4 Nodes & 2780W \\
+4 Nodes & 3880 W \\
 InfiniBand Switch & 100W \\
 Ethernet Switch & 20W \\
 GPU(Idle) & 100W \\
-Total Power & 3000W \\
+Total Power & 4000W \\
 \bottomrule
 \end{tabular}
 \caption{Power Consumption in GPU mode}
 \end{table}
 
 We use Flops (floating point operations per second) to estimate the theoretical performance of the cluster.
-The Xeon 6530 and 6530Y+ CPU has:
+The AMD EPYC 7642 has:
 \begin{itemize}
     \item 2 FMA engines per core (Fused Multiply-Add units)
     \item 8 lanes per FMA engine (SIMD vector width)  
     \item 2 floating point operations per cycle (1 multiply + 1 add)
-    \item 32 cores per CPU
+    \item 48 cores per CPU
     \item 2 CPU sockets per node
     \item 4 nodes total
-    \item 2.6 GHz clock frequency
+    \item 2.3 GHz clock frequency
 \end{itemize}
 
 \begin{align*}
 \text{FMA operations per cycle} &= 2\;\text{FMA} \times 8\;\text{lanes} \times 2\;\text{Flops/cycle} = 32\;\text{Flops/cycle/core} \\
-\text{Per CPU} &= 32\;\text{Flops/cycle/core} \times 32\;\text{cores} = 1024\;\text{Flops/cycle} \\
-\text{Per node} &= 1024\;\text{Flops/cycle} \times 2\;\text{sockets} = 2048\;\text{Flops/cycle} \\
-\text{Cluster total} &= 2048\;\text{Flops/cycle} \times 4\;\text{nodes} \times 2.6\;\text{GHz} \\
-&= 21299.2\;\text{GFlops} = 21.2992\;\text{TFlops}
+\text{Per CPU} &= 32\;\text{Flops/cycle/core} \times 48\;\text{cores} = 1536\;\text{Flops/cycle} \\
+\text{Per node} &= 1536\;\text{Flops/cycle} \times 2\;\text{sockets} = 3072\;\text{Flops/cycle} \\
+\text{Cluster total} &= 3072\;\text{Flops/cycle} \times 4\;\text{nodes} \times 2.3\;\text{GHz} \\
+&= 28262.4\;\text{GFlops} = 28.2624\;\text{TFlops}
 \end{align*}
 
-As the floating-point performance of a single H100 card is 51.22 TFlops, so the floating-point performance of the entire cluster is:
+As the floating-point performance of a single A100 card is 9.7 TFlops, so the floating-point performance of the entire cluster is:
 \begin{equation*}
-51.22\;\text{TFlops} \times 5 = 256.1 \;\text{TFlops}
+9.7\;\text{TFlops} \times 5 = 48.5 \;\text{TFlops}
 \end{equation*}
 
 \begin{table}[H]
@@ -434,14 +435,14 @@ As the floating-point performance of a single H100 card is 51.22 TFlops, so the 
 \toprule
 Mode & Performance \\
 \midrule
-CPU & 21.2922 TFlops \\
-GPU & 256.1 TFlops \\
+CPU & 28.2624 TFlops \\
+GPU & 48.5 TFlops \\
 \bottomrule
 \end{tabular}
 \caption{Cluster Performance In Theorey}
 \end{table}
 
-During the formation of the cluster, we used the server power calculation tool provided by Inspur to more accurately estimate power consumption. The cluster uses InfiniBand, a high-performance communication technology protocol with lower latency, greater bandwidth, and higher reliability for more powerful I/O performance, which is ideal for high-speed interconnection of nodes in a cluster. In addition, we have introduced NVLink technology in GPU nodes. NVLink technology provide high-speed interconnections between GPUs and CPUs for NVIDIA H100 graphics cards, and it is more than seven times faster than PCIe bandwidth compared to traditional PCIe links. This also makes it ideal for GPU-intensive high-performance computing. However, the cluster we built still has some shortcomings. At the software level, we did not use the latest packages (e.g., we used Intel oneAPI 2022 instead of 2023), which introduces support for new architectures but can also lead to compatibility issues, as was the case with some of the questions in the ASC competition. Also, at the hardware level, the H100 GPUs we used do not perform optimally in this power constraint and network topology, which is more noticeable when performing scenarios that require multi-card collaboration such as LLM training.
+Equipped with dual AMD EPYC™ 7642 processors, offering exceptional multi-core parallel processing capabilities for handling compute-intensive tasks efficiently. collaboration such as LLM training.Features NVIDIA A100 Tensor Core GPUs delivering unparalleled accel-eration for deep learning, AI inference, protein structure prediction, and other high-performance computing needs.NVLink technology provide high-speed interconnections between GPUs and CPUs for NVIDIA A100 graphics cards, and it is more than seven times faster than PCIe bandwidth compared to traditional PCIe links. This also makes it ideal for GPU-intensive high-performance computing. However, the cluster we built still has some shortcomings.Each node consumes up to 1270W, with the two A100 GPUs accounting for a substantial portion of the power usage. This leads to high overall energy consumption, necessitating efficient power supply and cooling systems.
 
 \subsection{HPL and HPCG Benchmarks}
 
