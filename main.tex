@@ -144,17 +144,62 @@ gromacs-5.1.4 & Molecular dynamics program \\
 
 \subsection{Supercomputing Courses and Groups}
 
-Our school has several student-led HPC interest groups, including parallel computing group, algorithm design and optimization group, Linux cluster construction group and test group. In the parallel computing group, the leading teachers teach relevant knowledge, and students learn parallel programming, C language, MPI, cluster management and other parallel computing knowledge independently. In addition, our school has set up a discussion group for students who like supercomputers. We learn from each other in the discussion group. Students who have experience in ASC or other super computing competitions actively share their experience. When they encounter problems that cannot be solved, they will discuss and seek solutions in the group
+\subsection*{Parallel Processing and Architecture (Software Engineering Major)}
+\textbf{Course Code:} - \quad \textbf{Credit Hours:} 32 \quad \textbf{Prerequisites:} Computer Architecture, Algorithms
+
+\subsubsection*{Course Objectives}
+This graduate-level course is a core component of computational science and technology, designed to address the rapid evolution of high-performance computing (HPC) and meet the demand for cultivating advanced technical talent. The course aims to:
+\begin{itemize}
+    \item Introduce hardware foundations of parallel computing architectures (e.g., multi-core CPUs, GPUs, and interconnects).
+    \item Explore core concepts in parallel computation, including task/data parallelism, load balancing, and synchronization.
+    \item Familiarize students with HPC software ecosystems (MPI, OpenMP, CUDA) and tools for performance profiling.
+    \item Develop skills in designing and implementing parallel algorithms for scientific and engineering applications.
+    \item Foster self-directed learning through hands-on projects and literature reviews.
+    \item Cultivate professional ethics, teamwork, and leadership skills through collaborative projects.
+\end{itemize}
+
+%----------------------------
+
+\subsection*{Parallel Computing (Computer Science \& Technology Major)}
+\textbf{Course Code:} 04110360 \quad \textbf{Credit Hours:} 32 \quad \textbf{Prerequisites:} Algorithms, Computer Architecture
+
+\subsubsection*{Learning Outcomes}
+By completing this course, undergraduates will achieve:
+\begin{itemize}
+    \item \textbf{Knowledge:}
+        \begin{itemize}
+            \item Master parallel architectures (SIMD, MIMD) and memory models (UMA, NUMA).
+            \item Understand parallel programming paradigms (shared vs. distributed memory).
+            \item Analyze scalability and efficiency of parallel algorithms using Amdahl's Law.
+        \end{itemize}
+    \item \textbf{Skills:}
+        \begin{itemize}
+            \item Develop optimized code for multi-core CPUs (pthreads, OpenMP) and GPUs (CUDA).
+            \item Debug and profile applications using tools like ParaView and Intel VTune.
+            \item Write technical reports and present results in academic formats.
+        \end{itemize}
+    \item \textbf{Professional Competencies:}
+        \begin{itemize}
+            \item Lead or collaborate in team projects mimicking real-world HPC scenarios.
+            \item Adhere to ethical standards in computational resource usage.
+        \end{itemize}
+\end{itemize}
+
+Our school has several student-led HPC interest groups, including parallel computing group, algorithm design and optimization group, Linux cluster construction group and test group. In the parallel computing group, the leading teachers teach relevant knowledge, and students learn parallel programming, C language, MPI, cluster management and other parallel computing knowledge independently. In addition, our school has set up a discussion group for students who like supercomputers. We learn from each other in the discussion group. Students who have experience in ASC or other super computing competitions actively share their experience. When they encounter problems that cannot be solved, they will discuss and seek solutions in the group.
 
 \subsection{Supercomputing-related Research and Applications}
 
-In July 2017, Yanshan University set up the Super center Center of Yanshan University through the integration of supercomputer resources in the university . The center contains a total of 36 nodes, 896 available computing cores , a total of 2.176TB of memory and 33TB of available storage capacity . Its theoretical double-precision floating point performance peaks at 28.672 trillion times per second. At Yanshan University, it is the highest-performance high-performance computing cluster with the largest computing capacity , the highest computing power and the most professional operation and maintenance team . It provides high-performance computing environment support for national and provincial-level scientific research projects undertaken by the research teams of other colleges . As of March 9 , 2018 , the total cost of the supercomputer CPU was 2963096203 seconds and 335 I jobs were scheduled. At present, after more than six months of trial operation , our school has accumulated rich experience in daily operation management , technical support , application services and personnel training of supercomputer centers.
+In July 2017, Yanshan University set up the Super Computing Center of Yanshan University through the integration of supercomputer resources in the university . The center contains a total of 36 nodes, 896 available computing cores , a total of 2.176TB of memory and 33TB of available storage capacity. Its theoretical double-precision floating point performance peaks at 28.672 trillion times per second. 
+
+At Yanshan University, it is the highest-performance high-performance computing cluster with the largest computing capacity , the highest computing power and the most professional operation and maintenance team . It provides high-performance computing environment support for national and provincial-level scientific research projects undertaken by the research teams of other colleges.
+
+As of October 14, 2020, the total cost of the supercomputer CPU was 35267617706 seconds and 56809 jobs were scheduled. Near 100 papers have been published with the help from Super Computing Center of Yanshan University.
 
 \subsection{Key Achievements in Supercomputing Research}
 
-a) In the 2022 World University Supercomputer Competition (ASC19), the teams of our school won the second-class award in the world. With the experience of our senior students.This year in ASC24, we will work harder to get better results and win an honor for our school.The award-winning certificates are as follows(Figure 1.4.2):
+a) In the 2022 World University Supercomputer Competition (ASC19) and ASC24, the teams of our school won the second-class award in the world.
 
-b) A team of our school successfully won the bronze prize of parallel optimization in the 8th "Intel Cup" Parallel Application Challenge pac2020. Here are the winners Certificate (Figure 1.4.2):
+b) A team of our school successfully won the bronze prize of parallel optimization in the 8th Intel Cup Parallel Application Challenge (PAC2020).
 
 \newpage
 
@@ -448,7 +493,7 @@ GPU & 48.5 TFlops \\
 \caption{Cluster Performance In Theorey}
 \end{table}
 
-Equipped with dual AMD EPYC™ 7642 processors, offering exceptional multi-core parallel processing capabilities for handling compute-intensive tasks efficiently. collaboration such as LLM training.Features NVIDIA A100 Tensor Core GPUs delivering unparalleled accel-eration for deep learning, AI inference, protein structure prediction, and other high-performance computing needs.NVLink technology provide high-speed interconnections between GPUs and CPUs for NVIDIA A100 graphics cards, and it is more than seven times faster than PCIe bandwidth compared to traditional PCIe links. This also makes it ideal for GPU-intensive high-performance computing. However, the cluster we built still has some shortcomings.Each node consumes up to 1270W, with the two A100 GPUs accounting for a substantial portion of the power usage. This leads to high overall energy consumption, necessitating efficient power supply and cooling systems.
+Equipped with dual AMD EPYC™ 7642 processors, offering exceptional multi-core parallel processing capabilities for handling compute-intensive tasks efficiently. collaboration such as LLM training. Features NVIDIA A100 Tensor Core GPUs delivering unparalleled accel-eration for deep learning, AI inference, protein structure prediction, and other high-performance computing needs.NVLink technology provide high-speed interconnections between GPUs and CPUs for NVIDIA A100 graphics cards, and it is more than seven times faster than PCIe bandwidth compared to traditional PCIe links. This also makes it ideal for GPU-intensive high-performance computing. However, the cluster we built still has some shortcomings.Each node consumes up to 1270W, with the two A100 GPUs accounting for a substantial portion of the power usage. This leads to high overall energy consumption, necessitating efficient power supply and cooling systems.
 
 \subsection{HPL and HPCG Benchmarks}
 
@@ -462,7 +507,7 @@ Equipped with dual AMD EPYC™ 7642 processors, offering exceptional multi-core 
 Hardware & Configuration \\
 \midrule
 CPU & Intel Xeon Gold 5218R x2 \\
-Memory & DDR3 128GB \\
+Memory & DDR4 128GB \\
 \bottomrule
 \end{tabular}
 \caption{Hardware Configuration}s
@@ -496,7 +541,7 @@ The HPL package includes a testing and timing program that measures the accuracy
 
 When the matrix size is N, the total number of floating point operations is:
 \begin{equation}
-    \boxed{N_{flop} = \frac{2N^3}{3} + 2N^2}
+    N_{flop} = \frac{2N^3}{3} + 2N^2
 \end{equation}
 
 Therefore, given the problem size N and measured execution time T, the system performance (in FLOPS) can be calculated as:
@@ -510,27 +555,27 @@ The algorithm used by HPL can be summarized by the following keywords: Two-dimen
 
 \paragraph{LU decomposition}
 
-Firstly, HPL compute the LU factorization of matrix A
-\begin{equation*}
+Firstly, HPL compute the LU factorization of matrix \( A \)
+\begin{equation}
 LU=A
-\end{equation*}
+\end{equation}
 
-L is the lower triangular matrix, is the upper triangular matrix
-\begin{equation*}
+\( L \) is the lower triangular matrix, is the upper triangular matrix
+\begin{equation}
 Ax=(LU) \cdot x=L \cdot (U \cdot x)=b
-\end{equation*}
+\end{equation}
 
-Solve for the y vector
-\begin{equation*}
+Solve for the \( y \) vector
+\begin{equation}
 Ly=b
-\end{equation*}
+\end{equation}
 
-And then solve for x
-\begin{equation*}
+And then solve for \( x \)
+\begin{equation}
 U x=y
-\end{equation*}
+\end{equation}
 
-So for Ax is equal to b, can convert Ax is equal to b into an upper trigonometric system. LU factorization of the matrix (A,b) to get the upper triangular matrix. The LU decomposition process is shown in the figure below:
+So for \( Ax \) is equal to \( b \), can convert \( Ax \) is equal to \( b \) into an upper trigonometric system. LU factorization of the matrix \( (A,b) \) to get the upper triangular matrix. The LU decomposition process is shown in the figure below:
 
 \begin{figure}[H]
     \centering
@@ -600,14 +645,14 @@ However, the increase of matrix size will lead to the increase of memory consump
 N \times N \times 8bytes = memory \times 80\%
 \end{equation*}
 
-Therefore, when the value of n is 113137, the effective calculation accounts for a high proportion.
+Therefore, when the value of \( n \) is 113137, the effective calculation accounts for a high proportion.
 
 \paragraph{Size of Block Matrix}
 
 NB is the size of the matrix block. In the process of solving the matrix, the size of the matrix block has a great impact on the performance. The choice of NB is closely related to many factors of software and hardware. The selection of Nb value generally follows the following rules:
 \begin{itemize}
     \item NB cannot be too large or too small, generally less than 384.
-    \item NB x 8 must be a multiple of the cache line.
+    \item NB \( x \) 8 must be a multiple of the cache line.
     \item The size of NB is related to communication mode, matrix scale, network, processor speed, etc.
     \item NB should be able to divide N.
 \end{itemize}
